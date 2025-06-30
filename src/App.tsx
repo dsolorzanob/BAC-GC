@@ -1,10 +1,9 @@
-import { Button } from "./components/ui/button";
+
+import { AppRouter } from "./router/AppRouter";
 
 function App() {
   return (
-    <>
-      <Button variant="default">Init</Button>
-    </>
+    <AppRouter />
   );
 }
 
