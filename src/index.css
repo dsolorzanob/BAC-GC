@@ -22,7 +22,9 @@
   --color-error-light: var(--color-error-light);
   --color-warning: var(--color-warning);
   --color-warning-light: var(--color-warning-light);
-
+  --color-info: var(--color-info);
+  --color-info-light: var(--color-info-light);
+  --shadow-card: var(--shadow-card);
   --spacing-xs: var(--spacing-xs);
   --spacing-sm: var(--spacing-sm);
   --spacing-md: var(--spacing-md);
@@ -95,6 +97,8 @@
   --accent: var(--color-background-light);
   --accent-foreground: var(--color-text);
   --destructive: var(--color-error);
+  --info: var(--color-info);
+  --info-foreground: var(--color-background);
   --border: var(--color-secondary-light);
   --input: var(--color-secondary-light);
   --ring: var(--color-primary);
@@ -155,3 +159,4 @@
     @apply bg-background text-foreground;
   }
 }
+

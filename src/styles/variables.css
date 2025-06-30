@@ -22,6 +22,11 @@
   --color-error-light: #f5c6cb;
   --color-warning: #ffc107;
   --color-warning-light: #ffeeba;
+  --color-info: #3A62D7;
+  --color-info-light: #38bdf8;
+  
+  /*shadows*/
+  --shadow-card: 0px 1px 5px 0px rgba(0,0,0,0.2);
   
   /*spacing*/
   --spacing-xs: 0.125rem;
