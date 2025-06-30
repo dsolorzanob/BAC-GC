@@ -1,0 +1,43 @@
+/* variables.css */
+:root {
+  /*palette colors*/
+  --color-primary: #ff1600;
+  --color-primary-light: #ff4d3a;
+  --color-primary-dark: #c21100;
+
+  --color-secondary: #595959;
+  --color-secondary-light: #8c8c8c;
+  --color-secondary-dark: #2c2c2c;
+
+  --color-background: #ffffff;
+  --color-background-light: #f1f0f1;
+
+  --color-text: #000000;
+  --color-text-light: #4b5563;
+  --color-text-dark: #2d3748;
+
+  --color-success: black;
+  --color-success-light: #5ddc85;
+  --color-error: #dc3545;
+  --color-error-light: #f5c6cb;
+  --color-warning: #ffc107;
+  --color-warning-light: #ffeeba;
+  
+  /*spacing*/
+  --spacing-xs: 0.125rem;
+  --spacing-sm: 0.25rem;
+  --spacing-md: 0.5rem;
+  --spacing-lg: 1rem;
+  --spacing-xl: 2rem;
+  --spacing-xxl: 4rem;
+  --spacing-xxxl: 8rem;
+  /*fonts*/
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-xxl: 1.5rem;
+  --font-size-xxxl: 2rem;
+}
+  
