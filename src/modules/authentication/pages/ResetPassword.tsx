@@ -1,6 +1,12 @@
+import EnterEmailForm from "../containers/EnterEmailForm";
+import { ResetPasswordLayout } from "../layouts/ResetPasswordLayout";
 
 const ResetPasswordPage = () => {
-  return <div>ResetPassword</div>;
+  return (
+    <ResetPasswordLayout>
+      <EnterEmailForm />
+    </ResetPasswordLayout>
+  );
 };
 
 export default ResetPasswordPage;
