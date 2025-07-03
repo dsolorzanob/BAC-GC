@@ -1,9 +1,18 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
-
-function Input({ className, type, ...props }: React.ComponentProps<"input">) {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
+  id?: string;
+}
+function Input({ className, label, id, type, ...props }: InputProps) {
   return (
+     <div className="space-y-1">
+      {label && (
+        <label htmlFor={id} className="text-sm font-medium">
+          {label}
+        </label>
+      )}
     <input
       type={type}
       data-slot="input"
@@ -15,6 +24,7 @@ function Input({ className, type, ...props }: React.ComponentProps<"input">) {
       )}
       {...props}
     />
+      </div>
   )
 }
 
