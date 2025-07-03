@@ -13,7 +13,7 @@ export const ResetPasswordLayout: React.FC<ResetPasswordLayoutProps> = ({
       <div className="w-[90%] md:w-[70%] lg:w-[30%] h-[400px] gap-2 flex flex-col">
         <div>
           <img src={logo} alt="logo" className="w-full " />
-        </div>
+        </div> 
         <div className="w-full">{children}</div>
       </div>
     </div>
