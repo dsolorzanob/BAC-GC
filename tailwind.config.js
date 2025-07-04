@@ -53,6 +53,30 @@ export default {
           foreground: "var(--destructive-foreground)",
         },
         // Colores personalizados adicionales
+        primary: {
+          DEFAULT: 'var(--color-primary)',
+          light: 'var(--color-primary-light)',
+          lighter: 'var(--color-primary-lighter)',
+          dark: 'var(--color-primary-dark)',
+        },
+        secondary: {
+          DEFAULT: 'var(--color-secondary)',
+          light: 'var(--color-secondary-light)',
+          lighter: 'var(--color-secondary-lighter)',
+          dark: 'var(--color-secondary-dark)',
+        },
+        blue: {
+          DEFAULT: 'var(--color-blue)',
+          light: 'var(--color-blue-light)',
+          lighter: 'var(--color-blue-lighter)',
+          dark: 'var(--color-blue-dark)',
+        },
+        info: {
+          DEFAULT: 'var(--color-info)',
+          light: 'var(--color-info-light)',
+          lighter: 'var(--color-info-lighter)',
+          dark: 'var(--color-info-dark)',
+        },
         success: {
           DEFAULT: 'var(--color-success)',
           light: 'var(--color-success-light)',
