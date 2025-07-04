@@ -57,8 +57,6 @@ const EnterNewPasswordForm = () => {
             {isSubmitting ? "Enviando..." : "Cambiar contraseña"}
           </Button>
         </form>
-
-        
       </div>
     </Card>
   );
