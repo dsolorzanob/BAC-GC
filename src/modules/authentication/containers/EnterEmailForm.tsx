@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { recoveryEmailSchema } from "../constants/recovery-email-schema";
 import type { EnterRecoveryEmail } from "../interfaces/recovery-email";
 
@@ -15,12 +15,11 @@ const EnterEmailForm = () => {
   } = useForm<EnterRecoveryEmail>({
     resolver: zodResolver(recoveryEmailSchema),
   });
-
+  const navigate = useNavigate();
   const onSubmit = async (data: EnterRecoveryEmail) => {
     try {
       console.log("Form data:", data);
-      // Aquí iría la lógica para enviar el email de recuperación
-      // await sendRecoveryEmail(data.email);
+      navigate("/reset-password/new-password");
     } catch (error) {
       console.error("Error sending recovery email:", error);
     }
