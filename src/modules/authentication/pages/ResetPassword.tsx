@@ -1,7 +1,7 @@
 import EnterEmailForm from "../containers/EnterEmailForm";
 import { ResetPasswordLayout } from "../layouts/ResetPasswordLayout";
 
-const ResetPasswordPage = () => {
+const SendEmailPage = () => {
   return (
     <ResetPasswordLayout>
       <EnterEmailForm />
@@ -9,4 +9,4 @@ const ResetPasswordPage = () => {
   );
 };
 
-export default ResetPasswordPage;
+export default SendEmailPage;
