@@ -19,7 +19,7 @@ const EnterEmailForm = () => {
   const onSubmit = async (data: EnterRecoveryEmail) => {
     try {
       console.log("Form data:", data);
-      navigate("/reset-password/new-password");
+      navigate("/reset-password/otp");
     } catch (error) {
       console.error("Error sending recovery email:", error);
     }
