@@ -1,33 +1,27 @@
 import { useForm } from "react-hook-form";
 import type { FieldErrors } from "react-hook-form";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { LoginLayout } from "../layouts/LoginLayout";
-import { toast } from "sonner";
-
-const LoginSchema = z.object({
-  username: z.string().min(1, "El usuario es requerido"),
-  password: z.string().min(1, "La contraseña es requerida"),
-  remember: z.boolean().optional(),
-});
-
-type LoginFormData = z.infer<typeof LoginSchema>;
+import { showToast } from "@/components/ui/toast";
+import { PasswordInput } from "@/components/ui/password";
+import { loginSchema } from "../constants/login-schema";
+import type { LoginFormData } from "../constants/login-schema";
 
 export default function LoginPage() {
-  const {
+  const { 
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormData>({
-    resolver: zodResolver(LoginSchema),
+    resolver: zodResolver(loginSchema),
   });
 
   const onSubmit = (data: LoginFormData) => {
     console.log("Formulario válido:", data);
-    toast.success("Inicio de sesión exitoso", {
+    showToast("success", "Inicio de sesión exitoso", {
       description: "Has iniciado sesión correctamente.",
     });
   };
@@ -39,7 +33,7 @@ export default function LoginPage() {
         ? firstError.message
         : "Revisa los campos del formulario";
 
-    toast.error("Error en el formulario", {
+    showToast("error", "Error en el formulario", {
       description: message,
     });
   };
@@ -62,7 +56,10 @@ export default function LoginPage() {
             Gestión de comunicaciones
           </h2>
 
-          <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-5">
+          <form
+            onSubmit={handleSubmit(onSubmit, onError)}
+            className="space-y-5"
+          >
             {/* Usuario */}
             <div>
               <label
@@ -87,15 +84,9 @@ export default function LoginPage() {
 
             {/* Contraseña */}
             <div>
-              <label
-                htmlFor="password"
-                className="text-sm font-medium text-gray-700 block mb-1"
-              >
-                Contraseña
-              </label>
-              <Input
+              <PasswordInput
                 id="password"
-                type="password"
+                label="Contraseña"
                 placeholder="Ingrese su contraseña"
                 {...register("password")}
                 className={errors.password ? "border-red-500" : ""}
@@ -109,17 +100,14 @@ export default function LoginPage() {
 
             {/* Recordarme */}
             <div className="flex items-center space-x-2">
-              <Checkbox id="remember" {...register("remember")} />
+              <Checkbox id="remember" />
               <label htmlFor="remember" className="text-sm text-gray-700">
                 Recordarme
               </label>
             </div>
 
             {/* Botón */}
-            <Button
-              type="submit"
-              className="w-full bg-blue-600 text-white hover:bg-blue-700"
-            >
+            <Button type="submit" className="w-full">
               Iniciar sesión
             </Button>
 
@@ -128,7 +116,10 @@ export default function LoginPage() {
               <a href="#" className="text-blue-600 hover:underline">
                 Crear cuenta
               </a>
-              <a href="#" className="text-blue-600 hover:underline">
+              <a
+                href="/reset-password/send-email"
+                className="text-blue-600 hover:underline"
+              >
                 ¿Olvidaste tu contraseña?
               </a>
             </div>
