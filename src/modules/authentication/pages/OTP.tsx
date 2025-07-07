@@ -1,12 +1,12 @@
-import EnterEmailForm from "../containers/EnterEmailForm";
 import { ResetPasswordLayout } from "../layouts/ResetPasswordLayout";
+import OTPForm from "../containers/OTPForm";
 
-const SendEmailPage = () => {
+const OTPPage = () => {
   return (
     <ResetPasswordLayout>
-      <EnterEmailForm />
+      <OTPForm />
     </ResetPasswordLayout>
   );
 };
 
-export default SendEmailPage;
+export default OTPPage;
