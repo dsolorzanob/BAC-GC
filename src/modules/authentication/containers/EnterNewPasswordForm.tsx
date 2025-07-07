@@ -53,7 +53,7 @@ const EnterNewPasswordForm = () => {
             <p className="text-sm text-red-500">{errors.confirmPassword.message}</p>
           )}
          </div>
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
+          <Button type="submit" className="w-full" disabled={isSubmitting} variant="filled" color="info">
             {isSubmitting ? "Enviando..." : "Cambiar contraseña"}
           </Button>
         </form>
