@@ -56,6 +56,8 @@ const EnterEmailForm = () => {
 
           <Button 
             type="submit" 
+            variant="filled"
+            color="info"
             className="w-full"
             disabled={isSubmitting}
           >

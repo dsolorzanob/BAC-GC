@@ -76,6 +76,8 @@ const OTPForm = () => {
 
           <Button 
             type="submit" 
+            variant="filled"
+            color="info"
             className="w-full"
             disabled={isSubmitting || otpValue.length !== 6}
           >
