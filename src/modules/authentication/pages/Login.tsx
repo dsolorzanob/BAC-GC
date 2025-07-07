@@ -1,11 +1,12 @@
-import React from "react";
 import { useForm } from "react-hook-form";
+import type { FieldErrors } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { LoginLayout } from "../layouts/LoginLayout";
+import { toast } from "sonner";
 
 const LoginSchema = z.object({
   username: z.string().min(1, "El usuario es requerido"),
@@ -25,7 +26,22 @@ export default function LoginPage() {
   });
 
   const onSubmit = (data: LoginFormData) => {
-    console.log(data);
+    console.log("Formulario válido:", data);
+    toast.success("Inicio de sesión exitoso", {
+      description: "Has iniciado sesión correctamente.",
+    });
+  };
+
+  const onError = (errors: FieldErrors<LoginFormData>) => {
+    const firstError = Object.values(errors)[0];
+    const message =
+      typeof firstError?.message === "string"
+        ? firstError.message
+        : "Revisa los campos del formulario";
+
+    toast.error("Error en el formulario", {
+      description: message,
+    });
   };
 
   return (
@@ -34,20 +50,25 @@ export default function LoginPage() {
         {/* Ilustración izquierda */}
         <div className="w-full max-w-md">
           <img
-            src="/illustration-login.png" 
+            src="/illustration-login.png"
             alt="Ilustración"
             className="w-full h-auto"
           />
         </div>
 
         {/* Formulario */}
-        <div className=" bg-white border border-gray-200 rounded-lg shadow-md p-6 space-y-6">
-          <h2 className="text-2xl font-bold text-center text-gray-800">Gestión de comunicaciones</h2>
+        <div className="bg-white border border-gray-200 rounded-lg shadow-md p-6 space-y-6">
+          <h2 className="text-2xl font-bold text-center text-gray-800">
+            Gestión de comunicaciones
+          </h2>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+          <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-5">
             {/* Usuario */}
             <div>
-              <label htmlFor="username" className="text-sm font-medium text-gray-700 block mb-1">
+              <label
+                htmlFor="username"
+                className="text-sm font-medium text-gray-700 block mb-1"
+              >
                 Usuario
               </label>
               <Input
@@ -58,13 +79,18 @@ export default function LoginPage() {
                 className={errors.username ? "border-red-500" : ""}
               />
               {errors.username && (
-                <p className="text-sm text-red-500 mt-1">{errors.username.message}</p>
+                <p className="text-sm text-red-500 mt-1">
+                  {errors.username.message}
+                </p>
               )}
             </div>
 
             {/* Contraseña */}
             <div>
-              <label htmlFor="password" className="text-sm font-medium text-gray-700 block mb-1">
+              <label
+                htmlFor="password"
+                className="text-sm font-medium text-gray-700 block mb-1"
+              >
                 Contraseña
               </label>
               <Input
@@ -75,25 +101,36 @@ export default function LoginPage() {
                 className={errors.password ? "border-red-500" : ""}
               />
               {errors.password && (
-                <p className="text-sm text-red-500 mt-1">{errors.password.message}</p>
+                <p className="text-sm text-red-500 mt-1">
+                  {errors.password.message}
+                </p>
               )}
             </div>
 
             {/* Recordarme */}
             <div className="flex items-center space-x-2">
               <Checkbox id="remember" {...register("remember")} />
-              <label htmlFor="remember" className="text-sm text-gray-700">Recordarme</label>
+              <label htmlFor="remember" className="text-sm text-gray-700">
+                Recordarme
+              </label>
             </div>
 
             {/* Botón */}
-            <Button type="submit" className="w-full bg-blue-600 text-white hover:bg-blue-700">
+            <Button
+              type="submit"
+              className="w-full bg-blue-600 text-white hover:bg-blue-700"
+            >
               Iniciar sesión
             </Button>
 
             {/* Enlaces */}
             <div className="flex justify-between text-sm mt-2">
-              <a href="#" className="text-blue-600 hover:underline">Crear cuenta</a>
-              <a href="#" className="text-blue-600 hover:underline">¿Olvidaste tu contraseña?</a>
+              <a href="#" className="text-blue-600 hover:underline">
+                Crear cuenta
+              </a>
+              <a href="#" className="text-blue-600 hover:underline">
+                ¿Olvidaste tu contraseña?
+              </a>
             </div>
           </form>
         </div>
