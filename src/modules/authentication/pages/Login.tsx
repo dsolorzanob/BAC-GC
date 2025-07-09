@@ -9,9 +9,11 @@ import { showToast } from "@/components/ui/toast";
 import { PasswordInput } from "@/components/ui/password";
 import { loginSchema } from "../constants/login-schema";
 import type { LoginFormData } from "../constants/login-schema";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
-  const { 
+  const navigate = useNavigate();
+  const {
     register,
     handleSubmit,
     formState: { errors },
@@ -21,9 +23,16 @@ export default function LoginPage() {
 
   const onSubmit = (data: LoginFormData) => {
     console.log("Formulario válido:", data);
+
+    // Simulamos login guardando un token
+    localStorage.setItem("token", "fake-jwt-token");
+
     showToast("success", "Inicio de sesión exitoso", {
       description: "Has iniciado sesión correctamente.",
     });
+
+    // Redireccionar al dashboard
+    navigate("/admin", { replace: true });
   };
 
   const onError = (errors: FieldErrors<LoginFormData>) => {
