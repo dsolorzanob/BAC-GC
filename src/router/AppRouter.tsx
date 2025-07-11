@@ -5,27 +5,31 @@ import LoginPage from "@/modules/authentication/pages/Login";
 import NewPasswordPage from "@/modules/authentication/pages/NewPassword";
 import SendEmailPage from "@/modules/authentication/pages/ResetPassword";
 import OTPPage from "@/modules/authentication/pages/OTP";
+import { PrivateRoute } from "@/router/PrivateRoute"; // Asegúrate de la ruta
+import { Dashboard } from "@/modules/Dashboard/pages/Dashboard";
+
 
 export const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Layout de autenticación para páginas de login/registro */}
+        {/* Rutas públicas */}
         <Route path="/" >
           <Route index element={<LoginPage />} />
+          <Route path="signup" element={<SignUpPage />} />
           <Route path="reset-password/send-email" element={<SendEmailPage />} />
           <Route path="reset-password/new-password" element={<NewPasswordPage />} />
           <Route path="reset-password/otp" element={<OTPPage />} />
-          <Route path="signup" element={<SignUpPage />} />
         </Route>
 
-        {/* Layout principal para páginas con header y footer */}
-        <Route path="/admin" element={<MainLayout />}>
-          <Route index element={<div>Dashboard Page</div>} />
-          <Route path="profile" element={<div>Profile Page</div>} />
+        {/* Rutas privadas envueltas en PrivateRoute */}
+        <Route element={<PrivateRoute />}>
+          <Route path="/admin" element={<MainLayout />}>
+            <Route index element={<Dashboard />} />
+          </Route>
         </Route>
 
-        {/* Ruta de fallback */}
+        {/* Fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
