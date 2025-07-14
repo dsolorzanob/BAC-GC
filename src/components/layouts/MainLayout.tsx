@@ -1,19 +1,32 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
+import { cn } from "@/lib/utils";
 
-export const MainLayout: React.FC = () => {
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { AppSidebar } from "./AppSidebar";
+
+interface Props {
+  children?: React.ReactNode;
+}
+
+export function MainLayout({ children }: Props) {
+  const defaultOpen = localStorage.getItem("sidebar_state") !== "false";
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b bg-card"></header>
-
-      {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
-        <Outlet />
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t bg-card mt-auto"></footer>
-    </div>
+    <SidebarProvider defaultOpen={defaultOpen}>
+      <AppSidebar />
+      <div
+        id="content"
+        className={cn(
+          "ml-auto w-full max-w-full",
+          "peer-data-[state=collapsed]:w-[calc(100%-var(--sidebar-width-icon)-1rem)]",
+          "peer-data-[state=expanded]:w-[calc(100%-var(--sidebar-width))]",
+          "sm:transition-[width] sm:duration-200 sm:ease-linear",
+          "flex h-svh flex-col",
+          "group-data-[scroll-locked=1]/body:h-full",
+          "has-[main.fixed-main]:group-data-[scroll-locked=1]/body:h-svh"
+        )}
+      >
+        {children ? children : <Outlet />}
+      </div>
+    </SidebarProvider>
   );
-};
+}

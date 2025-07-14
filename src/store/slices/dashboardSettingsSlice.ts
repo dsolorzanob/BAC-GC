@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 interface DashboardSettings {
-  theme: 'light' | 'dark';
+  theme: 'light' | 'dark' | 'system';
   showSidebar: boolean;
   language: string;
 }
@@ -20,7 +20,7 @@ const dashboardSettingsSlice = createSlice({
     toggleSidebar: (state) => {
       state.showSidebar = !state.showSidebar;
     },
-    setTheme: (state, action: PayloadAction<'light' | 'dark'>) => {
+    setTheme: (state, action: PayloadAction<'light' | 'dark' | 'system'>) => {
       state.theme = action.payload;
     },
     setLanguage: (state, action: PayloadAction<string>) => {

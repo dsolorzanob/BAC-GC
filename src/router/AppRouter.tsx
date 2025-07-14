@@ -5,8 +5,10 @@ import LoginPage from "@/modules/authentication/pages/Login";
 import NewPasswordPage from "@/modules/authentication/pages/NewPassword";
 import SendEmailPage from "@/modules/authentication/pages/ResetPassword";
 import OTPPage from "@/modules/authentication/pages/OTP";
-import { PrivateRoute } from "@/router/PrivateRoute"; // Asegúrate de la ruta
-import { Dashboard } from "@/modules/Dashboard/pages/Dashboard";
+import { PrivateRoute } from "@/router/PrivateRoute";
+import { Dashboard } from "@/modules/dashboard/pages/Dashboard";
+import { DesignPage } from "@/modules/design/pages/DesignPage";
+import { InquiriesPage } from "@/modules/inquiries/pages/InquiriesPage";
 
 
 export const AppRouter = () => {
@@ -26,6 +28,9 @@ export const AppRouter = () => {
         <Route element={<PrivateRoute />}>
           <Route path="/admin" element={<MainLayout />}>
             <Route index element={<Dashboard />} />
+            <Route path="diseño-de-publicidades" element={<DesignPage />} />
+            <Route path="consultas" element={<InquiriesPage />} />
+            <Route path="configuracion" element={<div className="p-6">Página de Configuración</div>} />
           </Route>
         </Route>
 
