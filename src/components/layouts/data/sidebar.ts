@@ -39,8 +39,8 @@ import type { SidebarData } from '../types'
         title: 'Publicidades',
         items: [
           {
-            title: 'Diseño de Publicidades',
-            url: '/admin/diseño-de-publicidades',
+            title: 'Diseño de publicidades',
+            url: '/admin/publicidades',
             icon: Frame,
           },
         ],

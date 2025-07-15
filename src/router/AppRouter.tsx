@@ -28,7 +28,7 @@ export const AppRouter = () => {
         <Route element={<PrivateRoute />}>
           <Route path="/admin" element={<MainLayout />}>
             <Route index element={<Dashboard />} />
-            <Route path="diseño-de-publicidades" element={<DesignPage />} />
+            <Route path="publicidades" element={<DesignPage />} />
             <Route path="consultas" element={<InquiriesPage />} />
             <Route path="configuracion" element={<div className="p-6">Página de Configuración</div>} />
           </Route>

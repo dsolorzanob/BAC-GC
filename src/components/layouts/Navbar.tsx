@@ -1,40 +1,38 @@
-
-import { Link, Menu } from 'lucide-react'
-import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
+import { Link, Menu } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from "@/components/ui/dropdown-menu";
 
 interface TopNavProps extends React.HTMLAttributes<HTMLElement> {
   links: {
-    title: string
-    href: string
-    isActive: boolean
-    disabled?: boolean
-  }[]
+    title: string;
+    href: string;
+    isActive: boolean;
+    disabled?: boolean;
+  }[];
 }
 
 export function TopNav({ className, links, ...props }: TopNavProps) {
   return (
     <>
-      <div className='md:hidden'>
+      <div className="md:hidden">
         <DropdownMenu modal={false}>
           <DropdownMenuTrigger asChild>
-            <Button size='icon' variant='outlined'>
+            <Button size="icon" variant="outlined">
               <Menu />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent side='bottom' align='start'>
-            {links.map(({ title, href, isActive, disabled }) => (
+          <DropdownMenuContent side="bottom" align="start">
+            {links.map(({ title, href, isActive }) => (
               <DropdownMenuItem key={`${title}-${href}`} asChild>
                 <Link
                   to={href}
-                  className={!isActive ? 'text-muted-foreground' : ''}
-                  disabled={disabled}
+                  className={!isActive ? "text-muted-foreground" : ""}
                 >
                   {title}
                 </Link>
@@ -46,7 +44,7 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
 
       <nav
         className={cn(
-          'hidden items-center space-x-4 md:flex lg:space-x-6',
+          "hidden items-center space-x-4 md:flex lg:space-x-6",
           className
         )}
         {...props}
@@ -56,12 +54,14 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
             key={`${title}-${href}`}
             to={href}
             disabled={disabled}
-            className={`hover:text-primary text-sm font-medium transition-colors ${isActive ? '' : 'text-muted-foreground'}`}
+            className={`hover:text-primary text-sm font-medium transition-colors ${
+              isActive ? "" : "text-muted-foreground"
+            }`}
           >
             {title}
           </Link>
         ))}
       </nav>
     </>
-  )
+  );
 }
