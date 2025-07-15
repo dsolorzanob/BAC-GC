@@ -1,8 +1,9 @@
 import {
     LayoutDashboard,
-    Settings,
+    Users,
     Frame,
     ChartNoAxesCombined,
+    Settings,
   } from 'lucide-react'
   import { Command, GalleryVerticalEnd } from 'lucide-react'
 import type { SidebarData } from '../types'
@@ -57,6 +58,16 @@ import type { SidebarData } from '../types'
       },
       {
         title: 'Administración',
+        items: [
+          {
+            title: 'Usuarios',
+            url: '/admin/usuarios',
+            icon: Users,
+          },
+        ],
+      },
+      {
+        title: 'Otras',
         items: [
           {
             title: 'Configuración',
