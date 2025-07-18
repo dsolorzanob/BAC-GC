@@ -1,10 +1,10 @@
 /* variables.css */
 :root {
   /*palette colors*/
-  --color-primary: #ff1600;
-  --color-primary-light: #ff4c4c;
-  --color-primary-lighter: #ff8d8d;
-  --color-primary-dark: #c70000;
+  --color-primary: #c81130;
+  --color-primary-light: #d62c4f;
+  --color-primary-lighter: #a7001b;
+  --color-primary-dark: #9f0f25;
 
   --color-info: #1976d2;
   --color-info-light: #64b5f6;

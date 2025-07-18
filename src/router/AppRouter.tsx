@@ -7,7 +7,9 @@ import SendEmailPage from "@/modules/authentication/pages/ResetPassword";
 import OTPPage from "@/modules/authentication/pages/OTP";
 import { PrivateRoute } from "@/router/PrivateRoute";
 import { Dashboard } from "@/modules/Dashboard/pages/Dashboard";
-import ReportesBACPage from "@/modules/Consultas/Consultas";
+import ConsultasPage from "@/modules/Consultas/Consultas";
+import { DesignPage } from "@/modules/design/pages/DesignPage";
+
 
 
 export const AppRouter = () => {
@@ -21,14 +23,16 @@ export const AppRouter = () => {
           <Route path="reset-password/send-email" element={<SendEmailPage />} />
           <Route path="reset-password/new-password" element={<NewPasswordPage />} />
           <Route path="reset-password/otp" element={<OTPPage />} />
-                <Route path="reportes" element={<ReportesBACPage />} />
+               
         </Route>
 
         {/* Rutas privadas */}
         <Route element={<PrivateRoute />}>
           <Route path="/admin" element={<MainLayout />}>
             <Route index element={<Dashboard />} />
-      
+            <Route path="publicidades" element={<DesignPage />} />
+            <Route path="consultas" element={<ConsultasPage />} />
+            <Route path="usuarios" element={<div className="p-6">Página de Usuarios</div>} />
           </Route>
         </Route>
 
