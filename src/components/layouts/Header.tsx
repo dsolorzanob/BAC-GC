@@ -1,12 +1,11 @@
-import React from 'react'
-import { cn } from '@/lib/utils'
-import { Separator } from '@/components/ui/separator'
-import { SidebarTrigger } from '@/components/ui/sidebar'
-import { SearchSidebar } from './SearchSidebar'
+import React from "react";
+import { cn } from "@/lib/utils";
+import { Separator } from "@/components/ui/separator";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 
 interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
-  fixed?: boolean
-  ref?: React.Ref<HTMLElement>
+  fixed?: boolean;
+  ref?: React.Ref<HTMLElement>;
 }
 
 export const Header = ({
@@ -15,36 +14,43 @@ export const Header = ({
   children,
   ...props
 }: HeaderProps) => {
-  const [offset, setOffset] = React.useState(0)
+  const [offset, setOffset] = React.useState(0);
 
   React.useEffect(() => {
     const onScroll = () => {
-      setOffset(document.body.scrollTop || document.documentElement.scrollTop)
-    }
+      setOffset(
+        document.body.scrollTop || document.documentElement.scrollTop
+      );
+    };
 
-    // Add scroll listener to the body
-    document.addEventListener('scroll', onScroll, { passive: true })
+    document.addEventListener("scroll", onScroll, { passive: true });
 
-    // Clean up the event listener on unmount
-    return () => document.removeEventListener('scroll', onScroll)
-  }, [])
+    return () => document.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <header
-    className={cn(
-      'bg-background flex h-16 items-center gap-3 p-4 sm:gap-4',
-      fixed && 'header-fixed peer/header fixed z-50 w-[inherit] rounded-md',
-      offset > 10 && fixed ? 'shadow-sm' : 'shadow-none',
-      className
-    )}
-    {...props}
+      className={cn(
+        "bg-background w-full flex flex-col sm:flex-row items-start sm:items-center gap-3 p-4 sm:gap-4 transition-shadow",
+        fixed &&
+          "header-fixed peer/header fixed z-50 rounded-md top-0 left-0 sm:h-16",
+        offset > 10 && fixed ? "shadow-md" : "shadow-none",
+        className
+      )}
+      {...props}
     >
-      <SidebarTrigger variant='outlined' className='scale-125 sm:scale-100' />
-      <Separator orientation='vertical' className='h-6' />
-   
-      {children}
-    </header>
-  )
-}
+      <div className="flex items-center gap-3 w-full sm:w-auto">
+        <SidebarTrigger
+          variant="outlined"
+          className="scale-125 sm:scale-100"
+        />
+        <Separator orientation="vertical" className="h-6 hidden sm:block" />
+      </div>
 
-Header.displayName = 'Header'
+      {/* Children responsivos */}
+      <div className="w-full sm:flex-1">{children}</div>
+    </header>
+  );
+};
+
+Header.displayName = "Header";
