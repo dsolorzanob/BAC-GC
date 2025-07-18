@@ -82,19 +82,16 @@ export default function ConsultasBACPage() {
     <div className="min-h-screen bg-muted">
       {/* Header */}
       <Header>
-        <div className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-6 py-4 bg-white border-b shadow-sm">
-          
-          <div className="flex items-center gap-4">
-            <SearchSidebar onSearch={() => {}} />
-            <ThemeSwitch />
-          </div>
+        <div className="flex items-center gap-4 justify-end">
+          <SearchSidebar onSearch={() => {}} />
+          <ThemeSwitch />
         </div>
       </Header>
 
       <div>
-            <h1 className="text-2xl font-bold text-primary">Consultas</h1>
-            <div className="text-sm text-muted-foreground">Home &gt; Detalle</div>
-          </div>
+        <h1 className="text-2xl font-bold text-primary">Consultas</h1>
+        <div className="text-sm text-muted-foreground">Home &gt; Detalle</div>
+      </div>
 
       {/* Filtros */}
       <div className="px-6 mt-6">
