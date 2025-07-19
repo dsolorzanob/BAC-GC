@@ -3,11 +3,11 @@ import { SearchSidebar } from "@/components/layouts/SearchSidebar";
 import { ThemeSwitch } from "@/components/layouts/SwitchTheme";
 import { Shovel } from "lucide-react";
 
-export const Dashboard = () => {
+export function DesignPage() {
   return (
-    <main className="flex-1 p-0 bg-gray-50 min-h-screen">
+    <div className="min-h-screen bg-gray-50">
       <Header>
-        <div className="ml-auto flex items-center space-x-4">
+        <div className="ml-auto flex items-center justify-end space-x-4">
           <SearchSidebar onSearch={() => {}} />
           <ThemeSwitch />
         </div>
@@ -18,6 +18,6 @@ export const Dashboard = () => {
         </div>
         <Shovel className="w-12 h-12 text-gray-500" />
       </div>
-    </main>
+    </div>
   );
-};
+}

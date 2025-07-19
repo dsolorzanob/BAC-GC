@@ -5,8 +5,11 @@ import LoginPage from "@/modules/authentication/pages/Login";
 import NewPasswordPage from "@/modules/authentication/pages/NewPassword";
 import SendEmailPage from "@/modules/authentication/pages/ResetPassword";
 import OTPPage from "@/modules/authentication/pages/OTP";
-import { PrivateRoute } from "@/router/PrivateRoute"; // Asegúrate de la ruta
+import { PrivateRoute } from "@/router/PrivateRoute";
 import { Dashboard } from "@/modules/Dashboard/pages/Dashboard";
+import { DesignPage } from "@/modules/design/pages/DesignPage";
+import InquiriesPage from "@/modules/inquiries/pages/InquiriesPage";
+
 
 
 export const AppRouter = () => {
@@ -14,18 +17,22 @@ export const AppRouter = () => {
     <BrowserRouter>
       <Routes>
         {/* Rutas públicas */}
-        <Route path="/" >
+        <Route path="/">
           <Route index element={<LoginPage />} />
           <Route path="signup" element={<SignUpPage />} />
           <Route path="reset-password/send-email" element={<SendEmailPage />} />
           <Route path="reset-password/new-password" element={<NewPasswordPage />} />
           <Route path="reset-password/otp" element={<OTPPage />} />
+               
         </Route>
 
-        {/* Rutas privadas envueltas en PrivateRoute */}
+        {/* Rutas privadas */}
         <Route element={<PrivateRoute />}>
           <Route path="/admin" element={<MainLayout />}>
             <Route index element={<Dashboard />} />
+            <Route path="publicidades" element={<DesignPage />} />
+            <Route path="consultas" element={<InquiriesPage />} />
+            <Route path="usuarios" element={<div className="p-6">Página de Usuarios</div>} />
           </Route>
         </Route>
 
