@@ -7,7 +7,7 @@ export function DesignPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header>
-        <div className="ml-auto flex items-center space-x-4">
+        <div className="ml-auto flex items-center justify-end space-x-4">
           <SearchSidebar onSearch={() => {}} />
           <ThemeSwitch />
         </div>
