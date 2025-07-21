@@ -6,8 +6,8 @@ import { Shovel } from "lucide-react";
 export const Dashboard = () => {
   return (
     <main className="flex-1 p-0 bg-gray-50 min-h-screen">
-      <Header>
-        <div className="ml-auto flex items-center space-x-4">
+       <Header>
+        <div className="ml-auto flex items-center justify-end space-x-4">
           <SearchSidebar onSearch={() => {}} />
           <ThemeSwitch />
         </div>
