@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         filled: "shadow-xs",
-        outlined: "border bg-background shadow-xs",
+        outlined: "border shadow-xs",
         ghost: "",
         link: "underline-offset-4",
       },

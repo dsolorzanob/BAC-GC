@@ -24,6 +24,7 @@ interface ReusableTableProps<T> {
   total?: number;
   onPageChange?: (newPage: number) => void;
    onPageSizeChange?: (newSize: number) => void;
+  onRowClick?: (row: T) => void;
 }
 
 export function ReusableTable<T extends Record<string, unknown>>({
@@ -34,6 +35,7 @@ export function ReusableTable<T extends Record<string, unknown>>({
   total,
   onPageChange,
   onPageSizeChange,
+  onRowClick,
 }: ReusableTableProps<T>) {
   const totalPages = total && pageSize ? Math.ceil(total / pageSize) : 1;
 
@@ -49,7 +51,11 @@ export function ReusableTable<T extends Record<string, unknown>>({
         </TableHeader>
         <TableBody>
           {data.map((row, rowIndex) => (
-            <TableRow key={rowIndex}>
+            <TableRow 
+              key={rowIndex}
+              onClick={() => onRowClick?.(row)}
+              className={onRowClick ? "cursor-pointer hover:bg-gray-50 transition-colors" : ""}
+            >
               {columns.map((col) => (
                 <TableCell key={String(col.key)}>
                   {col.render
@@ -94,7 +100,8 @@ export function ReusableTable<T extends Record<string, unknown>>({
           onClick={() => onPageChange(page - 1)}
           disabled={page === 1}
           className="px-4 h-8"
-          variant="filled"
+          variant="outlined"
+          color="primary"
         >
           ← Anterior
         </Button>
@@ -105,7 +112,8 @@ export function ReusableTable<T extends Record<string, unknown>>({
           onClick={() => onPageChange(page + 1)}
           disabled={page === totalPages}
           className="px-4 h-8"
-          variant="filled"
+          variant="outlined"
+          color="primary"
         >
           Siguiente →
         </Button>
