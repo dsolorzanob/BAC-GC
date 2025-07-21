@@ -100,7 +100,8 @@ export function ReusableTable<T extends Record<string, unknown>>({
           onClick={() => onPageChange(page - 1)}
           disabled={page === 1}
           className="px-4 h-8"
-          variant="filled"
+          variant="outlined"
+          color="primary"
         >
           ← Anterior
         </Button>
@@ -111,7 +112,8 @@ export function ReusableTable<T extends Record<string, unknown>>({
           onClick={() => onPageChange(page + 1)}
           disabled={page === totalPages}
           className="px-4 h-8"
-          variant="filled"
+          variant="outlined"
+          color="primary"
         >
           Siguiente →
         </Button>
