@@ -31,6 +31,20 @@ const data: Users[] = [
     email: "maria.gomez@gmail.com",
     rol: "Usuario",
   },
+  {
+    id: 3,
+    nombre: "Pedro",
+    apellido: "Gomez",
+    email: "pedro.gomez@gmail.com",
+    rol: "Usuario",
+  },
+  {
+    id: 4,
+    nombre: "Ana",
+    apellido: "Gomez",
+    email: "ana.gomez@gmail.com",
+    rol: "Usuario",
+  },
 ];
 
 const columns = [
