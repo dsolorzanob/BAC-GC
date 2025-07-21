@@ -3,7 +3,6 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarHeader,
-  SidebarInput,
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { NavGroup } from "./NavGroup";

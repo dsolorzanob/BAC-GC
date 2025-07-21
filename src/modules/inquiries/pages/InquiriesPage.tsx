@@ -79,7 +79,7 @@ export default function InquiriesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-muted">
+    <div className="min-h-screen">
       {/* Header */}
       <Header>
         <div className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-6 py-4 bg-white border-b shadow-sm">

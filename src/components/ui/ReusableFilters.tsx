@@ -85,7 +85,7 @@ export const ReusableFilters: React.FC<ReusableFiltersProps> = ({
         <Button variant="filled" onClick={onFilter}>
           Filtrar
         </Button>
-        <Button variant="filled" onClick={onDownload}>
+        <Button variant="outlined" color="success" onClick={onDownload}>
           Descargar
         </Button>
       </div>
