@@ -79,14 +79,12 @@ export default function InquiriesPage() {
   };
 
   return (
-    <div className="min-h-screen">
+     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <Header>
-        <div className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 px-6 py-4 bg-white border-b shadow-sm">
-          <div className="flex items-center gap-4">
-            <SearchSidebar onSearch={() => {}} />
-            <ThemeSwitch />
-          </div>
+        <Header>
+        <div className="ml-auto flex items-center justify-end space-x-4">
+          <SearchSidebar onSearch={() => {}} />
+          <ThemeSwitch />
         </div>
       </Header>
 
