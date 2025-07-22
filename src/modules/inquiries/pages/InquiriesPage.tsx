@@ -5,8 +5,19 @@ import { Header } from "@/components/layouts/Header";
 import { SearchSidebar } from "@/components/layouts/SearchSidebar";
 import { ThemeSwitch } from "@/components/layouts/SwitchTheme";
 import { Button } from "@/components/ui/button";
-import type { DetalleLote, Reporte } from "@/modules/inquiries/Interfaces/Inquires";
+import type {
+  DetalleLote,
+  Reporte,
+} from "@/modules/inquiries/Interfaces/Inquires";
 import { reportesData } from "@/modules/inquiries/utils/staticReportes";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function InquiriesPage() {
   const [page, setPage] = useState(1);
@@ -79,10 +90,10 @@ export default function InquiriesPage() {
       label: "Opciones",
       render: () => (
         <div className="flex gap-2">
-          <Button className="bg-yellow-400 text-black text-xs px-2 py-1 h-7">
+          <Button color="warning" variant="filled" size="sm">
             Reenviar
           </Button>
-          <Button className="bg-blue-600 text-white text-xs px-2 py-1 h-7">
+          <Button color="success" variant="outlined" size="sm">
             Descargar
           </Button>
         </div>
@@ -105,7 +116,7 @@ export default function InquiriesPage() {
             <h2 className="text-xl font-semibold">
               Detalle del lote: {selectedLote.lote}
             </h2>
-            <Button onClick={handleBack} variant="ghost">
+            <Button onClick={handleBack} variant="ghost" color="primary">
               ← Regresar
             </Button>
           </div>
@@ -113,20 +124,27 @@ export default function InquiriesPage() {
           <div className="flex flex-wrap gap-2 mb-4 items-end">
             <div>
               <label className="block text-sm">Parámetros de búsqueda</label>
-              <select className="border rounded px-2 py-1 w-40 text-sm">
-                <option>Seleccione</option>
-                <option>Email</option>
-                <option>Estado</option>
-              </select>
+              <Select>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Seleccione" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="email">Email</SelectItem>
+                  <SelectItem value="estado">Estado</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
             <div>
-              <input
-                className="border rounded px-2 py-1 w-52 text-sm"
-                placeholder="Ingrese valor"
-              />
+              <div className="w-52">
+                <Input placeholder="Ingrese valor" />
+              </div>
             </div>
-            <Button className="bg-red-600 text-white h-9">Buscar</Button>
-            <Button className="bg-green-600 text-white h-9">Descargar</Button>
+            <Button color="primary" variant="filled" size="default">
+              Buscar
+            </Button>
+            <Button color="success" variant="outlined" size="default">
+              Descargar
+            </Button>
           </div>
 
           <ReusableTable
@@ -143,7 +161,9 @@ export default function InquiriesPage() {
         <>
           <div className="px-6 mt-6">
             <h1 className="text-2xl font-bold text-primary">Consultas</h1>
-            <div className="text-sm text-muted-foreground">Home &gt; Detalle</div>
+            <div className="text-sm text-muted-foreground">
+              Home &gt; Detalle
+            </div>
           </div>
 
           <div className="px-6 mt-6">
