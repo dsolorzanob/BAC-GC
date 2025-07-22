@@ -116,7 +116,7 @@ export default function LoginPage() {
             </div>
 
             {/* Botón */}
-            <Button variant="filled" type="submit" className="w-full">
+            <Button variant="filled" type="submit" className="w-full" color="info">
               Iniciar sesión
             </Button>
 

@@ -12,7 +12,7 @@ export function MainLayout({ children }: Props) {
   const defaultOpen = localStorage.getItem("sidebar_state") !== "false";
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
-      <AppSidebar />
+      <AppSidebar isOpen={defaultOpen} />
       <div
         id="content"
         className={cn(
