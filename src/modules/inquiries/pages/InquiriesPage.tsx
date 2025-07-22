@@ -4,71 +4,19 @@ import { ReusableFilters } from "@/components/ui/ReusableFilters";
 import { Header } from "@/components/layouts/Header";
 import { SearchSidebar } from "@/components/layouts/SearchSidebar";
 import { ThemeSwitch } from "@/components/layouts/SwitchTheme";
-
-interface Reporte {
-  lote: string;
-  estado: string;
-  cantidad: string;
-  fecha: string;
-  abierto: string;
-  fallido: string;
-  spam: string;
-  rebote: string;
-  desuscrito: string;
-  [key: string]: string;
-}
-
-const data: Reporte[] = [
-  {
-    lote: "CicloEstudiantes2023-01",
-    estado: "Procesado",
-    cantidad: "7,278",
-    fecha: "4/23/2024 11:45",
-    abierto: "2,409",
-    fallido: "0",
-    spam: "0",
-    rebote: "208",
-    desuscrito: "0",
-  },
-  {
-    lote: "Campaña mes madres 2024",
-    estado: "Procesado",
-    cantidad: "100,000",
-    fecha: "6/10/2024 11:29",
-    abierto: "99,192",
-    fallido: "50",
-    spam: "2",
-    rebote: "708",
-    desuscrito: "50",
-  },
-];
-
-const columns = [
-  {
-    key: "lote",
-    label: "Lote/Ciclo/Campaña",
-    render: (val: string) => (
-      <span className="text-primary underline cursor-pointer">{val}</span>
-    ),
-  },
-  { key: "estado", label: "Estado" },
-  { key: "cantidad", label: "Cantidad" },
-  { key: "fecha", label: "Fecha Envío" },
-  { key: "abierto", label: "Abierto" },
-  { key: "fallido", label: "Fallido" },
-  { key: "spam", label: "Spam" },
-  { key: "rebote", label: "Rebote" },
-  { key: "desuscrito", label: "Desuscrito" },
-];
+import { Button } from "@/components/ui/button";
+import type { DetalleLote, Reporte } from "@/modules/inquiries/Interfaces/Inquires";
+import { reportesData } from "@/modules/inquiries/utils/staticReportes";
 
 export default function InquiriesPage() {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
-  const total = 20;
+  const total = reportesData.length;
 
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
   const [tipo, setTipo] = useState("");
+  const [selectedLote, setSelectedLote] = useState<Reporte | null>(null);
 
   const handleFilter = () => {
     console.log({ fromDate, toDate, tipo });
@@ -78,51 +26,156 @@ export default function InquiriesPage() {
     console.log("Descargar reporte...");
   };
 
+  const handleSelectLote = (row: Reporte) => {
+    setSelectedLote(row);
+  };
+
+  const handleBack = () => {
+    setSelectedLote(null);
+  };
+
+  const columnsGeneral = [
+    {
+      key: "lote",
+      label: "Lote/Ciclo/Campaña",
+      render: (val: string, row: Reporte) => (
+        <span
+          className="text-primary underline cursor-pointer"
+          onClick={() => handleSelectLote(row)}
+        >
+          {val}
+        </span>
+      ),
+    },
+    { key: "estado", label: "Estado" },
+    { key: "cantidad", label: "Cantidad" },
+    { key: "fecha", label: "Fecha Envío" },
+    { key: "abierto", label: "Abierto" },
+    { key: "fallido", label: "Fallido" },
+    { key: "spam", label: "Spam" },
+    { key: "rebote", label: "Rebote" },
+    { key: "desuscrito", label: "Desuscrito" },
+  ];
+
+  const detalleData: DetalleLote[] = [
+    {
+      email: "philippe.reyes@pbs.group",
+      estado: "Abierto",
+      cantidad: "2",
+      sistema: "IOS",
+      navegador: "Safari",
+      opciones: "",
+    },
+  ];
+
+  const columnsDetalle = [
+    { key: "email", label: "Email" },
+    { key: "estado", label: "Estado" },
+    { key: "cantidad", label: "Cantidad Abierto" },
+    { key: "sistema", label: "Sistema Operativo" },
+    { key: "navegador", label: "Navegador" },
+    {
+      key: "opciones",
+      label: "Opciones",
+      render: () => (
+        <div className="flex gap-2">
+          <Button className="bg-yellow-400 text-black text-xs px-2 py-1 h-7">
+            Reenviar
+          </Button>
+          <Button className="bg-blue-600 text-white text-xs px-2 py-1 h-7">
+            Descargar
+          </Button>
+        </div>
+      ),
+    },
+  ];
+
   return (
-     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-        <Header>
+    <div className="min-h-screen bg-gray-50">
+      <Header>
         <div className="ml-auto flex items-center justify-end space-x-4">
           <SearchSidebar onSearch={() => {}} />
           <ThemeSwitch />
         </div>
       </Header>
 
-      <div className="px-6 mt-6">
-        <h1 className="text-2xl font-bold text-primary">Consultas</h1>
-        <div className="text-sm text-muted-foreground">Home &gt; Detalle</div>
-      </div>
+      {selectedLote ? (
+        <div className="p-6">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl font-semibold">
+              Detalle del lote: {selectedLote.lote}
+            </h2>
+            <Button onClick={handleBack} variant="ghost">
+              ← Regresar
+            </Button>
+          </div>
 
-      {/* Filtros */}
-      <div className="px-6 mt-6">
-        <ReusableFilters
-          fromDate={fromDate}
-          toDate={toDate}
-          onFromDateChange={setFromDate}
-          onToDateChange={setToDate}
-          selectedOption={tipo}
-          onSelectChange={setTipo}
-          selectOptions={[
-            { label: "Dropdown Mkt", value: "mkt" },
-            { label: "Otro", value: "otro" },
-          ]}
-          onFilter={handleFilter}
-          onDownload={handleDownload}
-        />
-      </div>
+          <div className="flex flex-wrap gap-2 mb-4 items-end">
+            <div>
+              <label className="block text-sm">Parámetros de búsqueda</label>
+              <select className="border rounded px-2 py-1 w-40 text-sm">
+                <option>Seleccione</option>
+                <option>Email</option>
+                <option>Estado</option>
+              </select>
+            </div>
+            <div>
+              <input
+                className="border rounded px-2 py-1 w-52 text-sm"
+                placeholder="Ingrese valor"
+              />
+            </div>
+            <Button className="bg-red-600 text-white h-9">Buscar</Button>
+            <Button className="bg-green-600 text-white h-9">Descargar</Button>
+          </div>
 
-      {/* Tabla */}
-      <div className="px-6 mt-4 pb-10">
-        <ReusableTable<Reporte>
-          columns={columns}
-          data={data}
-          page={page}
-          pageSize={pageSize}
-          total={total}
-          onPageChange={setPage}
-          onPageSizeChange={setPageSize}
-        />
-      </div>
+          <ReusableTable
+            columns={columnsDetalle}
+            data={detalleData}
+            page={1}
+            pageSize={10}
+            total={1}
+            onPageChange={() => {}}
+            onPageSizeChange={() => {}}
+          />
+        </div>
+      ) : (
+        <>
+          <div className="px-6 mt-6">
+            <h1 className="text-2xl font-bold text-primary">Consultas</h1>
+            <div className="text-sm text-muted-foreground">Home &gt; Detalle</div>
+          </div>
+
+          <div className="px-6 mt-6">
+            <ReusableFilters
+              fromDate={fromDate}
+              toDate={toDate}
+              onFromDateChange={setFromDate}
+              onToDateChange={setToDate}
+              selectedOption={tipo}
+              onSelectChange={setTipo}
+              selectOptions={[
+                { label: "Dropdown Mkt", value: "mkt" },
+                { label: "Otro", value: "otro" },
+              ]}
+              onFilter={handleFilter}
+              onDownload={handleDownload}
+            />
+          </div>
+
+          <div className="px-6 mt-4 pb-10">
+            <ReusableTable<Reporte>
+              columns={columnsGeneral}
+              data={reportesData}
+              page={page}
+              pageSize={pageSize}
+              total={total}
+              onPageChange={setPage}
+              onPageSizeChange={setPageSize}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }
