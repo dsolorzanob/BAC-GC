@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Filter, Download } from 'lucide-react';
 
 interface FilterOption {
   label: string;
@@ -83,9 +84,11 @@ export const ReusableFilters: React.FC<ReusableFiltersProps> = ({
 
       <div className="flex gap-2 mt-1">
         <Button variant="filled" onClick={onFilter}>
+          <Filter className="h-4 w-4 mr-1" />
           Filtrar
         </Button>
         <Button variant="outlined" color="success" onClick={onDownload}>
+          <Download className="h-4 w-4 mr-1" />
           Descargar
         </Button>
       </div>

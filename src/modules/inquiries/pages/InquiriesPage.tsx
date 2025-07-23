@@ -7,6 +7,7 @@ import { ThemeSwitch } from "@/components/layouts/SwitchTheme";
 import { Button } from "@/components/ui/button";
 import type { DetalleLote, Reporte } from "@/modules/inquiries/Interfaces/Inquires";
 import { reportesData } from "@/modules/inquiries/utils/staticReportes";
+import { ArrowLeft, Search, Download, RefreshCw } from "lucide-react";
 
 export default function InquiriesPage() {
   const [page, setPage] = useState(1);
@@ -80,9 +81,11 @@ export default function InquiriesPage() {
       render: () => (
         <div className="flex gap-2">
           <Button className="bg-yellow-400 text-black text-xs px-2 py-1 h-7">
+            <RefreshCw className="h-3 w-3 mr-1" />
             Reenviar
           </Button>
           <Button className="bg-blue-600 text-white text-xs px-2 py-1 h-7">
+            <Download className="h-3 w-3 mr-1" />
             Descargar
           </Button>
         </div>
@@ -125,8 +128,14 @@ export default function InquiriesPage() {
                 placeholder="Ingrese valor"
               />
             </div>
-            <Button className="bg-red-600 text-white h-9">Buscar</Button>
-            <Button className="bg-green-600 text-white h-9">Descargar</Button>
+            <Button className="bg-red-600 text-white h-9">
+              <Search className="h-4 w-4 mr-1" />
+              Buscar
+            </Button>
+            <Button className="bg-green-600 text-white h-9">
+              <Download className="h-4 w-4 mr-1" />
+              Descargar
+            </Button>
           </div>
 
           <ReusableTable
