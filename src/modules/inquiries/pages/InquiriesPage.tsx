@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import type {
   DetalleLote,
   Reporte,
-} from "@/modules/inquiries/Interfaces/Inquires";
+} from "@/modules/inquiries/interfaces/Inquires";
 import { reportesData } from "@/modules/inquiries/utils/staticReportes";
 import { Input } from "@/components/ui/input";
 import {
@@ -47,6 +47,12 @@ export default function InquiriesPage() {
     setSelectedLote(null);
   };
 
+  const handleView = (row: Reporte) => {
+    console.log("Ver reporte:", row);
+    // Aquí puedes agregar la lógica para ver el detalle
+    // Por ejemplo, navegar a una página de detalle o abrir un modal
+  };
+
   const columnsGeneral = [
     {
       key: "lote",
@@ -68,6 +74,27 @@ export default function InquiriesPage() {
     { key: "spam", label: "Spam" },
     { key: "rebote", label: "Rebote" },
     { key: "desuscrito", label: "Desuscrito" },
+    {
+      key: "acciones",
+      label: "Acciones",
+      render: (val: any, row: Reporte) => (
+        <div className="flex gap-2">
+          <Button
+            onClick={(e) => {
+              e.stopPropagation();
+              handleView(row);
+            }}
+            variant="ghost"
+            color="secondary"
+            className="bg-gray-100"
+            size="sm"
+            title="Ver"
+          >
+            Ver
+          </Button>
+        </div>
+      ),
+    },
   ];
 
   const detalleData: DetalleLote[] = [
