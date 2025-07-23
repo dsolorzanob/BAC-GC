@@ -18,6 +18,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Download, RefreshCw, MoveLeft, Search } from "lucide-react";
+import { CustomBreadcrumb } from "@/components/ui/CustomBreadcrumb";
 
 export default function InquiriesPage() {
   const [page, setPage] = useState(1);
@@ -91,9 +93,11 @@ export default function InquiriesPage() {
       render: () => (
         <div className="flex gap-2">
           <Button color="warning" variant="filled" size="sm">
+            <RefreshCw className="h-3 w-3 mr-1" />
             Reenviar
           </Button>
           <Button color="success" variant="outlined" size="sm">
+            <Download className="h-3 w-3 mr-1" />
             Descargar
           </Button>
         </div>
@@ -112,25 +116,35 @@ export default function InquiriesPage() {
 
       {selectedLote ? (
         <div className="p-6">
+          <CustomBreadcrumb
+            items={[
+              { label: "Home", href: "/admin/consultas" },
+              { label: "Detalle", isCurrentPage: true },
+            ]}
+          />
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">
-              Detalle del lote: {selectedLote.lote}
-            </h2>
-            <Button onClick={handleBack} variant="ghost" color="primary">
-              ← Regresar
+            <h1 className="text-2xl font-bold text-primary">
+              {selectedLote.lote}
+            </h1>
+            <Button onClick={handleBack} variant="ghost" color="secondary">
+              <MoveLeft className="h-4 w-4 mr-1" />
+              Regresar
             </Button>
           </div>
 
-          <div className="flex flex-wrap gap-2 mb-4 items-end">
-            <div>
-              <label className="block text-sm">Parámetros de búsqueda</label>
-              <Select>
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Seleccione" />
+          <div className="bg-white p-6 rounded-xl shadow-md mb-8 flex flex-wrap gap-4 items-end">
+            <div className="flex flex-col gap-1">
+              <label className="text-sm font-medium text-muted-foreground">
+                Parametros
+              </label>
+              <Select value={tipo} onValueChange={setTipo}>
+                <SelectTrigger className="w-44">
+                  <SelectValue placeholder="Seleccionar tipo" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="email">Email</SelectItem>
-                  <SelectItem value="estado">Estado</SelectItem>
+                  <SelectItem value="informativo">Informativo</SelectItem>
+                  <SelectItem value="promocional">Promocional</SelectItem>
+                  <SelectItem value="urgente">Urgente</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -139,12 +153,20 @@ export default function InquiriesPage() {
                 <Input placeholder="Ingrese valor" />
               </div>
             </div>
-            <Button color="primary" variant="filled" size="default">
-              Buscar
-            </Button>
-            <Button color="success" variant="outlined" size="default">
-              Descargar
-            </Button>
+            <div className="flex gap-2 mt-1">
+              <Button variant="filled" color="primary" onClick={handleFilter}>
+                <Search className="h-4 w-4 mr-1" />
+                Buscar
+              </Button>
+              <Button
+                variant="outlined"
+                color="success"
+                onClick={handleDownload}
+              >
+                <Download className="h-4 w-4 mr-1" />
+                Descargar
+              </Button>
+            </div>
           </div>
 
           <ReusableTable
@@ -160,10 +182,8 @@ export default function InquiriesPage() {
       ) : (
         <>
           <div className="px-6 mt-6">
+            <CustomBreadcrumb items={[{ label: "Home", href: "/" }]} />
             <h1 className="text-2xl font-bold text-primary">Consultas</h1>
-            <div className="text-sm text-muted-foreground">
-              Home &gt; Detalle
-            </div>
           </div>
 
           <div className="px-6 mt-6">

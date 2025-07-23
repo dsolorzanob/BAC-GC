@@ -10,7 +10,8 @@ import { PasswordInput } from "@/components/ui/password";
 import { loginSchema } from "../constants/login-schema";
 import type { LoginFormData } from "../constants/login-schema";
 import { useNavigate } from "react-router-dom";
-
+import { Lock } from "lucide-react";
+import reference from "@/assets/reference-login.jpg";
 export default function LoginPage() {
   const navigate = useNavigate();
   const {
@@ -49,18 +50,18 @@ export default function LoginPage() {
 
   return (
     <LoginLayout>
-      <div className="w-full flex flex-col lg:flex-row items-center justify-center px-4 py-10 bg-white gap-12 max-w-6xl mx-auto">
+      <div className="w-full flex flex-col lg:flex-row items-center justify-center pr-4  bg-white gap-4">
         {/* Ilustración izquierda */}
-        <div className="w-full max-w-md">
+        <div className="w-full lg:w-[65%] h-[calc(100vh-73px)] overflow-hidden">
           <img
-            src="/illustration-login.png"
+            src={reference}
             alt="Ilustración"
-            className="w-full h-auto"
+            className="w-full h-full object-cover"
           />
         </div>
 
         {/* Formulario */}
-        <div className="bg-white border border-gray-200 rounded-lg shadow-md p-6 space-y-6">
+        <div className="w-full lg:w-[35%] bg-white border border-gray-200 rounded-lg shadow-md p-6 space-y-6">
           <h2 className="text-2xl font-bold text-center text-gray-800">
             Gestión de comunicaciones
           </h2>
@@ -116,10 +117,15 @@ export default function LoginPage() {
             </div>
 
             {/* Botón */}
-            <Button variant="filled" type="submit" className="w-full" color="info">
+            <Button
+              variant="filled"
+              type="submit"
+              className="w-full"
+              color="info"
+            >
+              <Lock className="h-4 w-4 mr-2" />
               Iniciar sesión
             </Button>
-
             {/* Enlaces */}
             <div className="flex justify-between text-sm mt-2">
               <a href="#" className="text-blue-600 hover:underline">
