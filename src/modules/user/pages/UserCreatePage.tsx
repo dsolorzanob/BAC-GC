@@ -12,6 +12,7 @@ import type { CreateUser } from "../interfaces/create-user";
 import { Header } from "@/components/layouts/Header";
 import { SearchSidebar } from "@/components/layouts/SearchSidebar";
 import { ThemeSwitch } from "@/components/layouts/SwitchTheme";
+import { CustomBreadcrumb } from "@/components/ui/CustomBreadcrumb";
 
 export default function UserCreatePage() {
   const navigate = useNavigate();
@@ -64,8 +65,13 @@ export default function UserCreatePage() {
           </Button>
         </div>
         <div className="mb-4">
+          <CustomBreadcrumb
+            items={[
+              { label: "Home", href: "/admin/usuarios" },
+              { label: "Crear Usuario", isCurrentPage: true },
+            ]}
+          />
           <h1 className="text-2xl font-bold text-primary">Crear Usuario</h1>
-          <div className="text-sm text-muted-foreground">Home &gt; Crear Usuario</div>
         </div>
         <Card>
           <CardContent>

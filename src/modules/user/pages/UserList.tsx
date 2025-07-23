@@ -7,6 +7,7 @@ import { SearchSidebar } from "@/components/layouts/SearchSidebar";
 import { ThemeSwitch } from "@/components/layouts/SwitchTheme";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import { CustomBreadcrumb } from "@/components/ui/CustomBreadcrumb";
 
 interface Users {
   id: number;
@@ -18,7 +19,8 @@ interface Users {
 }
 
 const data: Users[] = [
-  { id: 1,
+  {
+    id: 1,
     nombre: "Juan",
     apellido: "Perez",
     email: "juan.perez@gmail.com",
@@ -81,7 +83,7 @@ export default function UserList() {
 
   return (
     <div className="min-h-screen">
-       <Header>
+      <Header>
         <div className="ml-auto flex items-center justify-end space-x-4">
           <SearchSidebar onSearch={() => {}} />
           <ThemeSwitch />
@@ -91,11 +93,13 @@ export default function UserList() {
       <div className="px-6 mt-6">
         <div className="flex items-center justify-between mb-4">
           <div>
+            <CustomBreadcrumb
+              items={[{ label: "Home", href: "/admin/usuarios" }]}
+            />
             <h1 className="text-2xl font-bold text-primary">Usuarios</h1>
-            <div className="text-sm text-muted-foreground">Home</div>
           </div>
-          <Button 
-            variant="filled" 
+          <Button
+            variant="filled"
             color="info"
             onClick={() => navigate("/admin/usuarios/crear")}
             className="flex items-center gap-2"
@@ -105,7 +109,7 @@ export default function UserList() {
           </Button>
         </div>
       </div>
-      
+
       {/* Tabla */}
       <div className="px-6 mt-4 pb-10">
         <ReusableTable<Users>

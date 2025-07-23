@@ -5,9 +5,13 @@ import { Header } from "@/components/layouts/Header";
 import { SearchSidebar } from "@/components/layouts/SearchSidebar";
 import { ThemeSwitch } from "@/components/layouts/SwitchTheme";
 import { Button } from "@/components/ui/button";
-import type { DetalleLote, Reporte } from "@/modules/inquiries/Interfaces/Inquires";
+import type {
+  DetalleLote,
+  Reporte,
+} from "@/modules/inquiries/Interfaces/Inquires";
 import { reportesData } from "@/modules/inquiries/utils/staticReportes";
 import { ArrowLeft, Search, Download, RefreshCw } from "lucide-react";
+import { CustomBreadcrumb } from "@/components/ui/CustomBreadcrumb";
 
 export default function InquiriesPage() {
   const [page, setPage] = useState(1);
@@ -104,6 +108,12 @@ export default function InquiriesPage() {
 
       {selectedLote ? (
         <div className="p-6">
+          <CustomBreadcrumb
+            items={[
+              { label: "Home", href: "/admin/consultas" },
+              { label: "Detalle", isCurrentPage: true },
+            ]}
+          />
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-semibold">
               Detalle del lote: {selectedLote.lote}
@@ -151,8 +161,8 @@ export default function InquiriesPage() {
       ) : (
         <>
           <div className="px-6 mt-6">
+            <CustomBreadcrumb items={[{ label: "Home", href: "/" }]} />
             <h1 className="text-2xl font-bold text-primary">Consultas</h1>
-            <div className="text-sm text-muted-foreground">Home &gt; Detalle</div>
           </div>
 
           <div className="px-6 mt-6">
