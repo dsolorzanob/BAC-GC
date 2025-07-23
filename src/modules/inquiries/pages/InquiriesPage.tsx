@@ -8,9 +8,17 @@ import { Button } from "@/components/ui/button";
 import type {
   DetalleLote,
   Reporte,
-} from "@/modules/inquiries/Interfaces/Inquires";
+} from "@/modules/inquiries/interfaces/Inquires";
 import { reportesData } from "@/modules/inquiries/utils/staticReportes";
-import { ArrowLeft, Search, Download, RefreshCw, Eye } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Download, RefreshCw, MoveLeft, Search } from "lucide-react";
 import { CustomBreadcrumb } from "@/components/ui/CustomBreadcrumb";
 
 export default function InquiriesPage() {
@@ -111,11 +119,11 @@ export default function InquiriesPage() {
       label: "Opciones",
       render: () => (
         <div className="flex gap-2">
-          <Button className="bg-yellow-400 text-black text-xs px-2 py-1 h-7">
+          <Button color="warning" variant="filled" size="sm">
             <RefreshCw className="h-3 w-3 mr-1" />
             Reenviar
           </Button>
-          <Button className="bg-blue-600 text-white text-xs px-2 py-1 h-7">
+          <Button color="success" variant="outlined" size="sm">
             <Download className="h-3 w-3 mr-1" />
             Descargar
           </Button>
@@ -135,6 +143,16 @@ export default function InquiriesPage() {
 
       {selectedLote ? (
         <div className="p-6">
+          <Button
+            onClick={handleBack}
+            variant="ghost"
+            color="secondary"
+            size="sm"
+            className="mb-4"
+          >
+            <MoveLeft className="h-4 w-4 mr-1" />
+            Regresar
+          </Button>
           <CustomBreadcrumb
             items={[
               { label: "Home", href: "/admin/consultas" },
@@ -142,37 +160,46 @@ export default function InquiriesPage() {
             ]}
           />
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">
-              Detalle del lote: {selectedLote.lote}
-            </h2>
-            <Button onClick={handleBack} variant="ghost">
-              ← Regresar
-            </Button>
+            <h1 className="text-2xl font-bold text-primary">
+              {selectedLote.lote}
+            </h1>
           </div>
 
-          <div className="flex flex-wrap gap-2 mb-4 items-end">
-            <div>
-              <label className="block text-sm">Parámetros de búsqueda</label>
-              <select className="border rounded px-2 py-1 w-40 text-sm">
-                <option>Seleccione</option>
-                <option>Email</option>
-                <option>Estado</option>
-              </select>
+          <div className="bg-white p-6 rounded-xl shadow-md mb-8 flex flex-wrap gap-4 items-end">
+            <div className="flex flex-col gap-1">
+              <label className="text-sm font-medium text-muted-foreground">
+                Parametros
+              </label>
+              <Select value={tipo} onValueChange={setTipo}>
+                <SelectTrigger className="w-44">
+                  <SelectValue placeholder="Seleccionar tipo" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="informativo">Informativo</SelectItem>
+                  <SelectItem value="promocional">Promocional</SelectItem>
+                  <SelectItem value="urgente">Urgente</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
             <div>
-              <input
-                className="border rounded px-2 py-1 w-52 text-sm"
-                placeholder="Ingrese valor"
-              />
+              <div className="w-52">
+                <Input placeholder="Ingrese valor" />
+              </div>
             </div>
-            <Button className="bg-red-600 text-white h-9">
-              <Search className="h-4 w-4 mr-1" />
-              Buscar
-            </Button>
-            <Button className="bg-green-600 text-white h-9">
-              <Download className="h-4 w-4 mr-1" />
-              Descargar
-            </Button>
+            <div className="flex gap-2 mt-1">
+              <Button variant="filled" color="primary" onClick={handleFilter}>
+                <Search className="h-4 w-4 mr-1" />
+                Buscar
+              </Button>
+              <Button
+                variant="outlined"
+                color="success"
+                onClick={handleDownload}
+              >
+                <Download className="h-4 w-4 mr-1" />
+                Descargar
+              </Button>
+            </div>
           </div>
 
           <ReusableTable
