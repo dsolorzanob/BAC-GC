@@ -53,7 +53,8 @@ export default function UserCreatePage() {
         <div className="container mx-auto px-4">
         <div className="mb-1 mt-4">
           <Button
-            variant="outlined"
+            variant="ghost"
+            size="sm"
             color="secondary"
             onClick={handleBack}
             className="mb-4"
