@@ -116,6 +116,16 @@ export default function InquiriesPage() {
 
       {selectedLote ? (
         <div className="p-6">
+          <Button
+            onClick={handleBack}
+            variant="ghost"
+            color="secondary"
+            size="sm"
+            className="mb-4"
+          >
+            <MoveLeft className="h-4 w-4 mr-1" />
+            Regresar
+          </Button>
           <CustomBreadcrumb
             items={[
               { label: "Home", href: "/admin/consultas" },
@@ -126,10 +136,6 @@ export default function InquiriesPage() {
             <h1 className="text-2xl font-bold text-primary">
               {selectedLote.lote}
             </h1>
-            <Button onClick={handleBack} variant="ghost" color="secondary">
-              <MoveLeft className="h-4 w-4 mr-1" />
-              Regresar
-            </Button>
           </div>
 
           <div className="bg-white p-6 rounded-xl shadow-md mb-8 flex flex-wrap gap-4 items-end">
