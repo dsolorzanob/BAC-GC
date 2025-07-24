@@ -1,13 +1,35 @@
 /* variables.css */
 :root {
   /*palette colors*/
-  --color-primary: #ff1600;
-  --color-primary-light: #ff4d3a;
-  --color-primary-dark: #c21100;
+  --color-primary: #c81130;
+  --color-primary-light: #d62c4f;
+  --color-primary-lighter: #a7001b;
+  --color-primary-dark: #9f0f25;
+
+  --color-info: #1976d2;
+  --color-info-light: #64b5f6;
+  --color-info-lighter: #90caf9;
+  --color-info-dark: #0d47a1;
 
   --color-secondary: #595959;
-  --color-secondary-light: #8c8c8c;
-  --color-secondary-dark: #2c2c2c;
+  --color-secondary-light: #afafaf;
+  --color-secondary-lighter: #c0c0c0;
+  --color-secondary-dark: #343333;
+
+  --color-success: #2E7D32;
+  --color-success-light: #81C784;
+  --color-success-lighter: #A5D6A7;
+  --color-success-dark: #1B5E20;
+
+  --color-error: #D32F2F;
+  --color-error-light: #E57373;
+  --color-error-lighter: #EF9A9A;
+  --color-error-dark: #B71C1C;
+
+  --color-warning: #F57C00;
+  --color-warning-light: #F49C43;
+  --color-warning-lighter: #FFE0B2;
+  --color-warning-dark: #E65100;
 
   --color-background: #ffffff;
   --color-background-light: #f1f0f1;
@@ -16,14 +38,7 @@
   --color-text-light: #4b5563;
   --color-text-dark: #2d3748;
 
-  --color-success: black;
-  --color-success-light: #5ddc85;
-  --color-error: #dc3545;
-  --color-error-light: #f5c6cb;
-  --color-warning: #ffc107;
-  --color-warning-light: #ffeeba;
-  --color-info: #3A62D7;
-  --color-info-light: #38bdf8;
+  
   
   /*shadows*/
   --shadow-card: 0px 1px 5px 0px rgba(0,0,0,0.2);
