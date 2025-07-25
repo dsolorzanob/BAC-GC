@@ -119,7 +119,7 @@ export default function UserList() {
             size="sm"
             title="Editar"
           >
-            <Edit className="h-3 w-3 mr-1" />
+            <Edit className="h-3 w-3" />
           </Button>
           <Button
             onClick={(e) => {
@@ -131,7 +131,7 @@ export default function UserList() {
             size="sm"
             title="Eliminar"
           >
-            <Trash className="h-3 w-3 mr-1" />
+            <Trash className="h-3 w-3" />
           </Button>
           <Button
             onClick={(e) => {

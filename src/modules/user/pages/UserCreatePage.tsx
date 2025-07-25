@@ -73,7 +73,7 @@ export default function UserCreatePage() {
           <h1 className="text-2xl font-bold text-primary">Crear Usuario</h1>
         </div>
         <Card>
-          <CardContent>
+          <CardContent className="px-2">
             <form
               onSubmit={handleSubmit(onSubmit, onError)}
               className="space-y-4"

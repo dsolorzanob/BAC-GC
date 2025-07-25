@@ -107,7 +107,7 @@ export default function UserEditPage() {
           <h1 className="text-2xl font-bold text-primary">Editar Usuario</h1>
         </div>
         <Card>
-          <CardContent>
+          <CardContent className="px-2">
             <form
               onSubmit={handleSubmit(onSubmit, onError)}
               className="space-y-4"
