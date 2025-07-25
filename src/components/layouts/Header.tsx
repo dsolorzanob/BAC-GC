@@ -31,7 +31,7 @@ export const Header = ({
   return (
     <header
       className={cn(
-        "bg-background w-full flex flex-col sm:flex-row items-start sm:items-center gap-3 p-4 sm:gap-4 transition-shadow",
+        "bg-background w-full flex flex-row items-center gap-3 p-4 sm:gap-4 transition-shadow",
         fixed &&
           "header-fixed peer/header fixed z-50 rounded-md top-0 left-0 sm:h-16",
         offset > 10 && fixed ? "shadow-md" : "shadow-none",
@@ -39,7 +39,7 @@ export const Header = ({
       )}
       {...props}
     >
-      <div className="flex items-center gap-3 w-full sm:w-auto">
+      <div className="flex items-center gap-3 w-auto">
         <SidebarTrigger
           variant="outlined"
           className="scale-125 sm:scale-100"
@@ -48,7 +48,7 @@ export const Header = ({
       </div>
 
       {/* Children responsivos */}
-      <div className="w-full sm:flex-1">{children}</div>
+      <div className="flex-1 flex justify-end">{children}</div>
     </header>
   );
 };
