@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { ReusableTable } from "@/components/ui/ReusableTable";
 import { ReusableFilters } from "@/components/ui/ReusableFilters";
 import { Header } from "@/components/layouts/Header";
@@ -18,7 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Download, RefreshCw, MoveLeft, Search } from "lucide-react";
+import { Download, RefreshCw, MoveLeft, Search, Filter } from "lucide-react";
 import { CustomBreadcrumb } from "@/components/ui/CustomBreadcrumb";
 
 export default function InquiriesPage() {
@@ -133,7 +133,7 @@ export default function InquiriesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <Header>
         <div className="ml-auto flex items-center justify-end space-x-4">
           {/* Botón de búsqueda para móvil */}
@@ -148,12 +148,12 @@ export default function InquiriesPage() {
           >
             <Search className="h-4 w-4" />
           </Button>
-          
+
           {/* SearchSidebar para desktop */}
           <div className="hidden md:block">
             <SearchSidebar onSearch={() => {}} />
           </div>
-          
+
           <ThemeSwitch />
         </div>
       </Header>
@@ -182,7 +182,7 @@ export default function InquiriesPage() {
             </h1>
           </div>
 
-          <div className="bg-white p-6 rounded-xl shadow-md mb-8 flex flex-wrap gap-4 items-end">
+          <div className="bg-white p-6 rounded-xl shadow-md mb-8 hidden md:flex flex-wrap gap-4 items-end">
             <div className="flex flex-col gap-1">
               <label className="text-sm font-medium text-muted-foreground">
                 Parametros
@@ -218,16 +218,30 @@ export default function InquiriesPage() {
               </Button>
             </div>
           </div>
-
-          <ReusableTable
-            columns={columnsDetalle}
-            data={detalleData}
-            page={1}
-            pageSize={10}
-            total={1}
-            onPageChange={() => {}}
-            onPageSizeChange={() => {}}
-          />
+          <div className="mt-4 flex justify-end md:hidden">
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                // Aquí puedes agregar la lógica para abrir el modal de filtros
+                console.log("Abrir modal de filtros");
+              }}
+              className="flex items-center gap-2"
+            >
+              <Filter className="h-4 w-4" />
+            </Button>
+          </div>
+          <div className="mt-4 pb-10">
+            <ReusableTable
+              columns={columnsDetalle}
+              data={detalleData}
+              page={1}
+              pageSize={10}
+              total={1}
+              onPageChange={() => {}}
+              onPageSizeChange={() => {}}
+            />
+          </div>
         </div>
       ) : (
         <>
@@ -236,7 +250,7 @@ export default function InquiriesPage() {
             <h1 className="text-2xl font-bold text-primary">Consultas</h1>
           </div>
 
-          <div className="px-6 mt-6">
+          <div className="px-6 mt-6 hidden md:block">
             <ReusableFilters
               fromDate={fromDate}
               toDate={toDate}
@@ -251,6 +265,19 @@ export default function InquiriesPage() {
               onFilter={handleFilter}
               onDownload={handleDownload}
             />
+          </div>
+          <div className="px-6 mt-4 flex justify-end md:hidden">
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={() => {
+                // Aquí puedes agregar la lógica para abrir el modal de filtros
+                console.log("Abrir modal de filtros");
+              }}
+              className="flex items-center gap-2"
+            >
+              <Filter className="h-4 w-4" />
+            </Button>
           </div>
 
           <div className="px-6 mt-4 pb-10">
