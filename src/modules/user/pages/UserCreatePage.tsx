@@ -1,9 +1,8 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/ui/password";
 import { ArrowLeft } from "lucide-react";
@@ -43,15 +42,15 @@ export default function UserCreatePage() {
     console.error("Form errors:", errors);
   };
 
-      return (
-      <div className="min-h-screen">
-        <Header>
-          <div className="ml-auto flex items-center justify-end space-x-4">
-            <SearchSidebar onSearch={() => {}} />
-            <ThemeSwitch />
-          </div>
-        </Header>
-        <div className="container mx-auto px-4">
+  return (
+    <div className="min-h-screen">
+      <Header>
+        <div className="ml-auto flex items-center justify-end space-x-4">
+          <SearchSidebar onSearch={() => {}} />
+          <ThemeSwitch />
+        </div>
+      </Header>
+      <div className="container mx-auto px-4">
         <div className="mb-1 mt-4">
           <Button
             variant="ghost"
