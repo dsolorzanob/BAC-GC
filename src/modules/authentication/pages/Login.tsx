@@ -50,9 +50,9 @@ export default function LoginPage() {
 
   return (
     <LoginLayout>
-      <div className="w-full flex flex-col lg:flex-row items-center justify-center pr-4  bg-white gap-4">
+      <div className="w-full h-full flex flex-col lg:flex-row items-center justify-center px-4 bg-white gap-4">
         {/* Ilustración izquierda */}
-        <div className="w-full lg:w-[65%] h-[calc(100vh-73px)] overflow-hidden">
+        <div className="hidden lg:block w-full lg:w-[65%] h-[calc(100vh-73px)] overflow-hidden">
           <img
             src={reference}
             alt="Ilustración"
