@@ -1,18 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ReusableTable } from "@/components/ui/ReusableTable";
-import { ReusableFilters } from "@/components/ui/ReusableFilters";
 import { Header } from "@/components/layouts/Header";
 import { SearchSidebar } from "@/components/layouts/SearchSidebar";
 import { ThemeSwitch } from "@/components/layouts/SwitchTheme";
 import { Button } from "@/components/ui/button";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { Plus, Eye, Edit, Trash } from "lucide-react";
+import { Plus, Edit, Trash, Search } from "lucide-react";
 import { CustomBreadcrumb } from "@/components/ui/CustomBreadcrumb";
 
 interface Users {
@@ -126,7 +119,7 @@ export default function UserList() {
             size="sm"
             title="Editar"
           >
-            <Edit className="h-3 w-3 mr-1" />
+            <Edit className="h-3 w-3" />
           </Button>
           <Button
             onClick={(e) => {
@@ -138,7 +131,7 @@ export default function UserList() {
             size="sm"
             title="Eliminar"
           >
-            <Trash className="h-3 w-3 mr-1" />
+            <Trash className="h-3 w-3" />
           </Button>
           <Button
             onClick={(e) => {
@@ -162,7 +155,24 @@ export default function UserList() {
     <div className="min-h-screen">
       <Header>
         <div className="ml-auto flex items-center justify-end space-x-4">
-          <SearchSidebar onSearch={() => {}} />
+          {/* Botón de búsqueda para móvil */}
+          <Button
+            variant="ghost"
+            size="sm"
+            className="md:hidden"
+            onClick={() => {
+              // Aquí puedes agregar la lógica para abrir un modal de búsqueda o navegar a una página de búsqueda
+              console.log("Abrir búsqueda en móvil");
+            }}
+          >
+            <Search className="h-4 w-4" />
+          </Button>
+
+          {/* SearchSidebar para desktop */}
+          <div className="hidden md:block">
+            <SearchSidebar onSearch={() => {}} />
+          </div>
+
           <ThemeSwitch />
         </div>
       </Header>

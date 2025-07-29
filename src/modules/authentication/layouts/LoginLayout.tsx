@@ -15,7 +15,7 @@ export const LoginLayout: React.FC<LoginLayoutProps> = ({ children }) => {
       </header>
 
       {/* Contenido principal */}
-      <main className="flex-1 flex flex-col justify-between items-center pr-4">
+      <main className="flex-1 flex flex-col justify-between items-center mt-4 md:mt-0">
         {children}
       </main>
     </div>
