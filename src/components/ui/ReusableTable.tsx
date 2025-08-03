@@ -15,12 +15,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./select";
-import {
-  Pencil,
-  Trash2,
-  Download,
-  RefreshCcw,
-} from "lucide-react";
 
 interface Column<T> {
   key: keyof T;
@@ -28,7 +22,7 @@ interface Column<T> {
   render?: (value: T[keyof T], row: T) => React.ReactNode;
 }
 
-interface ReusableTableProps<T> {
+interface ReusableTableProps<T extends Record<string, unknown>> {
   columns: Column<T>[];
   data: T[];
   page?: number;
@@ -37,9 +31,10 @@ interface ReusableTableProps<T> {
   onPageChange?: (newPage: number) => void;
   onPageSizeChange?: (newSize: number) => void;
   onRowClick?: (row: T) => void;
+  renderActions?: (row: T) => React.ReactNode;
 }
 
-export function ReusableTable<T extends Record<string, any>>({
+export function ReusableTable<T extends Record<string, unknown>>({
   columns,
   data,
   page,
@@ -48,6 +43,7 @@ export function ReusableTable<T extends Record<string, any>>({
   onPageChange,
   onPageSizeChange,
   onRowClick,
+  renderActions,
 }: ReusableTableProps<T>) {
   const totalPages = total && pageSize ? Math.ceil(total / pageSize) : 1;
 
@@ -61,6 +57,7 @@ export function ReusableTable<T extends Record<string, any>>({
               {columns.map((col) => (
                 <TableHead key={String(col.key)}>{col.label}</TableHead>
               ))}
+              {renderActions && <TableHead>Acciones</TableHead>}
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -81,6 +78,7 @@ export function ReusableTable<T extends Record<string, any>>({
                       : String(row[col.key])}
                   </TableCell>
                 ))}
+                {renderActions && <TableCell>{renderActions(row)}</TableCell>}
               </TableRow>
             ))}
           </TableBody>
@@ -95,47 +93,11 @@ export function ReusableTable<T extends Record<string, any>>({
             className="relative border rounded-xl shadow-md p-4 bg-white"
           >
             {/* Acciones superiores */}
-            <div className="absolute top-2 right-2 flex gap-2">
-              {row.editable && (
-                <Button
-                  variant="ghost"
-                  color="blue"
-                  size="icon"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    console.log("Editar", row);
-                  }}
-                >
-                  <Pencil className="w-4 h-4" />
-                </Button>
-              )}
-              {row.deletable && (
-                <Button
-                  variant="ghost"
-                  color="error"
-                  size="icon"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    console.log("Eliminar", row);
-                  }}
-                >
-                  <Trash2 className="w-4 h-4" />
-                </Button>
-              )}
-              {row.downloadable && (
-                <Button
-                  variant="ghost"
-                  color="success"
-                  size="icon"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    console.log("Descargar", row);
-                  }}
-                >
-                  <Download className="w-4 h-4" />
-                </Button>
-              )}
-            </div>
+            {renderActions && (
+              <div className="absolute top-2 right-2 flex gap-2">
+                {renderActions(row)}
+              </div>
+            )}
 
             {/* Contenido */}
             {columns.map((col, colIndex) => (
@@ -159,22 +121,9 @@ export function ReusableTable<T extends Record<string, any>>({
               </div>
             ))}
 
-            {/* Acción inferior */}
-            <div className="mt-4">
-              {row.accion === "reenviar" ? (
-                <Button
-                  variant="filled"
-                  color="warning"
-                  className="w-full"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    console.log("Reenviar", row);
-                  }}
-                >
-                  <RefreshCcw className="w-4 h-4" />
-                  Reenviar
-                </Button>
-              ) : (
+            {/* Acción inferior (solo si renderActions no está definido) */}
+            {!renderActions && (
+              <div className="mt-4">
                 <Button
                   variant="filled"
                   color="primary"
@@ -186,8 +135,8 @@ export function ReusableTable<T extends Record<string, any>>({
                 >
                   Ver
                 </Button>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         ))}
       </div>

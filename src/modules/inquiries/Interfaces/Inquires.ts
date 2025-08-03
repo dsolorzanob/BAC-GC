@@ -1,22 +1,22 @@
-export interface Reporte {
-  lote: string;
-  estado: string;
-  cantidad: string;
-  fecha: string;
-  abierto: string;
-  fallido: string;
+export interface Report {
+  batch: string;
+  status: string;
+  quantity: string;
+  date: string;
+  opened: string;
+  failed: string;
   spam: string;
-  rebote: string;
-  desuscrito: string;
+  bounced: string;
+  unsubscribed: string;
   [key: string]: string;
 }
 
-export interface DetalleLote {
+export interface BatchDetail {
   email: string;
-  estado: string;
-  cantidad: string;
-  sistema: string;
-  navegador: string;
-  opciones: string;
-  [key: string]: unknown; 
+  status: string;
+  count: string;
+  os: string;
+  browser: string;
+  options: string;
+  [key: string]: string;
 }
