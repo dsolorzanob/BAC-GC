@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { otpSchema } from "../constants/otp-schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import type { OTP } from "../interfaces/otp";
 import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "@/components/ui/input-otp";
 
@@ -84,6 +84,14 @@ const OTPForm = () => {
             {isSubmitting ? "Verificando..." : "Verificar código"}
           </Button>
         </form>
+        <div className="text-center">
+          <Link 
+            to="/login" 
+            className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
+          >
+            Volver al inicio de sesión
+          </Link>
+        </div>
       </div>
     </Card>
   );

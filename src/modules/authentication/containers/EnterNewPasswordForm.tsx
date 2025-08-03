@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { newPasswordSchema } from "../constants/new-password-schema";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import type { NewPassword } from "../interfaces/new-password";
 import { PasswordInput } from "@/components/ui/password";
 
@@ -57,6 +57,14 @@ const EnterNewPasswordForm = () => {
             {isSubmitting ? "Enviando..." : "Cambiar contraseña"}
           </Button>
         </form>
+        <div className="text-center">
+          <Link 
+            to="/login" 
+            className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
+          >
+            Volver al inicio de sesión
+          </Link>
+        </div>
       </div>
     </Card>
   );

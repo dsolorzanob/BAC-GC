@@ -50,8 +50,8 @@ export default function LoginPage() {
 
   return (
     <LoginLayout>
-      <div className="w-full h-full flex flex-col lg:flex-row items-center justify-center px-4 bg-white gap-4">
-        {/* Ilustración izquierda */}
+      <div className="w-full h-full flex flex-col lg:flex-row items-center justify-center bg-white gap-2 mr-4">
+      
         <div className="hidden lg:block w-full lg:w-[65%] h-[calc(100vh-73px)] overflow-hidden">
           <img
             src={reference}
@@ -74,7 +74,7 @@ export default function LoginPage() {
             <div>
               <label
                 htmlFor="username"
-                className="text-sm font-medium text-gray-700 block mb-1"
+                className="text-sm font-medium block mb-1"
               >
                 Usuario
               </label>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Check, Moon, Sun } from "lucide-react";
+import { Check, Moon, Sun, Monitor } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,21 +31,24 @@ export function ThemeSwitch() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light{" "}
+          <Sun className="mr-2 h-4 w-4" />
+          Claro
           <Check
             size={14}
             className={cn("ml-auto", theme !== "light" && "hidden")}
           />
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
+          <Moon className="mr-2 h-4 w-4" />
+          Oscuro
           <Check
             size={14}
             className={cn("ml-auto", theme !== "dark" && "hidden")}
           />
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("system")}>
-          System
+          <Monitor className="mr-2 h-4 w-4" />
+          Sistema
           <Check
             size={14}
             className={cn("ml-auto", theme !== "system" && "hidden")}
