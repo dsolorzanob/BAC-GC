@@ -5,7 +5,7 @@ import { ThemeSwitch } from "@/components/layouts/SwitchTheme";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import { reportesData } from "@/modules/inquiries/utils/staticReportes";
-import { InquiryDetail } from "@/modules/inquiries/components/InquiryDetail";
+import { InquiryDetail } from "@/modules/inquiries/pages/InquiryDetail";
 import { InquiryList } from "@/modules/inquiries/components/InquiryList";
 import type { Report } from "@/modules/inquiries/Interfaces/Inquires";
 
@@ -27,17 +27,17 @@ export default function InquiriesPage() {
   };
 
   const handleDownload = () => {
-    console.log("Download report...");
+    console.log("Descargando reporte...");
   };
 
   const handleView = (row: Report) => {
-    console.log("View report:", row);
+    console.log("Ver reporte:", row);
   };
 
   const listColumns = [
     {
       key: "batch",
-      label: "Batch/Cycle/Campaign",
+      label: "Lote/Ciclo/Campaña",
       render: (val: string, row: Report) => (
         <span
           className="text-primary underline cursor-pointer"
@@ -47,14 +47,14 @@ export default function InquiriesPage() {
         </span>
       ),
     },
-    { key: "status", label: "Status" },
-    { key: "quantity", label: "Amount" },
-    { key: "date", label: "Send Date" },
-    { key: "opened", label: "Opened" },
-    { key: "failed", label: "Failed" },
+    { key: "status", label: "Estado" },
+    { key: "quantity", label: "Cantidad" },
+    { key: "date", label: "Fecha de envío" },
+    { key: "opened", label: "Abiertos" },
+    { key: "failed", label: "Fallidos" },
     { key: "spam", label: "Spam" },
-    { key: "bounced", label: "Bounce" },
-    { key: "unsubscribed", label: "Unsubscribed" },
+    { key: "bounced", label: "Rebotados" },
+    { key: "unsubscribed", label: "Darse de baja" },
   ];
 
   return (
@@ -65,7 +65,7 @@ export default function InquiriesPage() {
             variant="ghost"
             size="sm"
             className="md:hidden"
-            onClick={() => console.log("Open mobile search")}
+            onClick={() => console.log("Abrir búsqueda móvil")}
           >
             <Search className="h-4 w-4" />
           </Button>

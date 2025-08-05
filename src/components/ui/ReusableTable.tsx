@@ -48,7 +48,7 @@ export function ReusableTable<T extends Record<string, unknown>>({
   const totalPages = total && pageSize ? Math.ceil(total / pageSize) : 1;
 
   return (
-    <div className="rounded-xl border shadow-sm overflow-x-auto bg-white">
+    <div className="rounded-xl overflow-x-auto sm:border sm:shadow-sm sm:bg-white bg-transparent">
       {/* Tabla para pantallas grandes */}
       <div className="hidden sm:block">
         <Table>
@@ -86,60 +86,61 @@ export function ReusableTable<T extends Record<string, unknown>>({
       </div>
 
       {/* Tarjetas para móviles */}
-      <div className="sm:hidden space-y-4 p-4">
-        {data.map((row, rowIndex) => (
-          <div
-            key={rowIndex}
-            className="relative border rounded-xl shadow-md p-4 bg-white"
+   <div className="sm:hidden space-y-4 p-4">
+  {data.map((row, rowIndex) => (
+    <div
+      key={rowIndex}
+      className="relative rounded-xl p-4 ring-1 ring-gray-200 bg-white"
+    >
+      {/* Acciones superiores */}
+      {renderActions && (
+        <div className="absolute top-2 right-2 flex gap-2">
+          {renderActions(row)}
+        </div>
+      )}
+
+      {/* Contenido */}
+      {columns.map((col, colIndex) => (
+        <div key={String(col.key)} className="mb-2">
+          {colIndex === 0 ? (
+            <div className="text-sm font-bold text-gray-800">
+              {col.render
+                ? col.render(row[col.key], row)
+                : String(row[col.key])}
+            </div>
+          ) : (
+            <div className="text-xs text-gray-600">
+              {col.label}:{" "}
+              <span className="font-medium text-gray-700">
+                {col.render
+                  ? col.render(row[col.key], row)
+                  : String(row[col.key])}
+              </span>
+            </div>
+          )}
+        </div>
+      ))}
+
+      {/* Acción inferior */}
+      {!renderActions && (
+        <div className="mt-4">
+          <Button
+            variant="filled"
+            color="primary"
+            className="w-full"
+            onClick={(e) => {
+              e.stopPropagation();
+              console.log("Ver", row);
+            }}
           >
-            {/* Acciones superiores */}
-            {renderActions && (
-              <div className="absolute top-2 right-2 flex gap-2">
-                {renderActions(row)}
-              </div>
-            )}
+            Ver
+          </Button>
+        </div>
+      )}
+    </div>
+  ))}
+</div>
 
-            {/* Contenido */}
-            {columns.map((col, colIndex) => (
-              <div key={String(col.key)} className="mb-2">
-                {colIndex === 0 ? (
-                  <div className="text-sm font-bold text-gray-800">
-                    {col.render
-                      ? col.render(row[col.key], row)
-                      : String(row[col.key])}
-                  </div>
-                ) : (
-                  <div className="text-xs text-gray-600">
-                    {col.label}:{" "}
-                    <span className="font-medium text-gray-700">
-                      {col.render
-                        ? col.render(row[col.key], row)
-                        : String(row[col.key])}
-                    </span>
-                  </div>
-                )}
-              </div>
-            ))}
-
-            {/* Acción inferior (solo si renderActions no está definido) */}
-            {!renderActions && (
-              <div className="mt-4">
-                <Button
-                  variant="filled"
-                  color="primary"
-                  className="w-full"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    console.log("Ver", row);
-                  }}
-                >
-                  Ver
-                </Button>
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
 
       {/* Paginación */}
       {page !== undefined &&

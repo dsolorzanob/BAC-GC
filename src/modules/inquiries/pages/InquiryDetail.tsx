@@ -1,7 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { MoveLeft, Search, Download, Filter, RefreshCw } from "lucide-react";
 import { CustomBreadcrumb } from "@/components/ui/CustomBreadcrumb";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { ReusableTable } from "@/components/ui/ReusableTable";
 import type { Report, BatchDetail } from "@/modules/inquiries/Interfaces/Inquires";
@@ -24,23 +30,23 @@ export function InquiryDetail({ selectedBatch, onReturn }: InquiryDetailProps) {
   ];
 
   const detailColumns = [
-    { key: "email", label: "Email" },
-    { key: "status", label: "Status" },
-    { key: "count", label: "Open Count" },
-    { key: "os", label: "OS" },
-    { key: "browser", label: "Browser" },
+    { key: "email", label: "Correo electrónico" },
+    { key: "status", label: "Estado" },
+    { key: "count", label: "Cantidad de aperturas" },
+    { key: "os", label: "Sistema operativo" },
+    { key: "browser", label: "Navegador" },
     {
       key: "options",
-      label: "Options",
+      label: "Opciones",
       render: () => (
         <div className="flex gap-2">
           <Button color="warning" variant="filled" size="sm">
             <RefreshCw className="h-3 w-3 mr-1" />
-            Resend
+            Reenviar
           </Button>
           <Button color="success" variant="outlined" size="sm">
             <Download className="h-3 w-3 mr-1" />
-            Download
+            Descargar
           </Button>
         </div>
       ),
@@ -57,13 +63,13 @@ export function InquiryDetail({ selectedBatch, onReturn }: InquiryDetailProps) {
         className="mb-4"
       >
         <MoveLeft className="h-4 w-4 mr-1" />
-        Back
+        Regresar
       </Button>
 
       <CustomBreadcrumb
         items={[
-          { label: "Home", href: "/admin/inquiries" },
-          { label: "Detail", isCurrentPage: true },
+          { label: "Inicio", href: "/admin/inquiries" },
+          { label: "Detalle", isCurrentPage: true },
         ]}
       />
 
@@ -76,30 +82,30 @@ export function InquiryDetail({ selectedBatch, onReturn }: InquiryDetailProps) {
       <div className="bg-white p-6 rounded-xl shadow-md mb-8 hidden md:flex flex-wrap gap-4 items-end">
         <div className="flex flex-col gap-1">
           <label className="text-sm font-medium text-muted-foreground">
-            Parameters
+            Parámetros
           </label>
           <Select>
             <SelectTrigger className="w-44">
-              <SelectValue placeholder="Select type" />
+              <SelectValue placeholder="Selecciona el tipo" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="informative">Informative</SelectItem>
-              <SelectItem value="promotional">Promotional</SelectItem>
-              <SelectItem value="urgent">Urgent</SelectItem>
+              <SelectItem value="informative">Informativo</SelectItem>
+              <SelectItem value="promotional">Promocional</SelectItem>
+              <SelectItem value="urgent">Urgente</SelectItem>
             </SelectContent>
           </Select>
         </div>
         <div className="w-52">
-          <Input placeholder="Enter value" />
+          <Input placeholder="Ingresa un valor" />
         </div>
         <div className="flex gap-2 mt-1">
           <Button variant="filled" color="primary">
             <Search className="h-4 w-4 mr-1" />
-            Search
+            Buscar
           </Button>
           <Button variant="outlined" color="success">
             <Download className="h-4 w-4 mr-1" />
-            Download
+            Descargar
           </Button>
         </div>
       </div>
@@ -108,7 +114,7 @@ export function InquiryDetail({ selectedBatch, onReturn }: InquiryDetailProps) {
         <Button
           variant="outlined"
           color="primary"
-          onClick={() => console.log("Open filter modal")}
+          onClick={() => console.log("Abrir modal de filtros")}
           className="flex items-center gap-2"
         >
           <Filter className="h-4 w-4" />

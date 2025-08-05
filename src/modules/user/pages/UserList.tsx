@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Filter } from "lucide-react";
+import { Filter, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CustomBreadcrumb } from "@/components/ui/CustomBreadcrumb";
 import { ReusableFilters } from "@/components/ui/ReusableFilters";
 import { ReusableTable } from "@/components/ui/ReusableTable";
 import { RowActions } from "@/components/ui/RowActions";
+import { Header } from "@/components/layouts/Header";
+import { SearchSidebar } from "@/components/layouts/SearchSidebar";
+import { ThemeSwitch } from "@/components/layouts/SwitchTheme";
 
 type TableColumn<T> = {
   key: keyof T | string;
@@ -97,9 +100,25 @@ export default function UserList() {
   ];
 
   return (
-    <>
+    <div className="min-h-screen">
+      <Header>
+        <div className="ml-auto flex items-center justify-end space-x-4">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="md:hidden"
+            onClick={() => console.log("Abrir búsqueda móvil")}
+          >
+            <Search className="h-4 w-4" />
+          </Button>
+          <div className="hidden md:block">
+            <SearchSidebar onSearch={() => {}} />
+          </div>
+          <ThemeSwitch />
+        </div>
+      </Header>
       <div className="px-6 mt-6">
-        <CustomBreadcrumb items={[{ label: "Home", href: "/" }]} />
+        <CustomBreadcrumb items={[{ label: "Inicio", href: "/" }]} />
         <h1 className="text-2xl font-bold text-primary">Usuarios</h1>
       </div>
 
@@ -153,6 +172,6 @@ export default function UserList() {
           )}
         />
       </div>
-    </>
+    </div>
   );
 }

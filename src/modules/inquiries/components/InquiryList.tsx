@@ -5,6 +5,7 @@ import { ReusableFilters } from "@/components/ui/ReusableFilters";
 import { ReusableTable } from "@/components/ui/ReusableTable";
 import { RowActions } from "@/components/ui/RowActions";
 import type { Report } from "@/modules/inquiries/Interfaces/Inquires";
+
 type TableColumn<T> = {
   key: keyof T | string;
   label: string;
@@ -27,7 +28,7 @@ interface InquiryListProps {
   setType: (val: string) => void;
   onFilter: () => void;
   onDownload: () => void;
- listColumns: TableColumn<Report>[];
+  listColumns: TableColumn<Report>[];
   handleView: (row: Report) => void;
 }
 
@@ -52,8 +53,8 @@ export function InquiryList({
   return (
     <>
       <div className="px-6 mt-6">
-        <CustomBreadcrumb items={[{ label: "Home", href: "/" }]} />
-        <h1 className="text-2xl font-bold text-primary">Inquiries</h1>
+        <CustomBreadcrumb items={[{ label: "Inicio", href: "/" }]} />
+        <h1 className="text-2xl font-bold text-primary">Consultas</h1>
       </div>
 
       <div className="px-6 mt-6 hidden md:block">
@@ -66,7 +67,7 @@ export function InquiryList({
           onSelectChange={setType}
           selectOptions={[
             { label: "Dropdown Mkt", value: "mkt" },
-            { label: "Other", value: "other" },
+            { label: "Otro", value: "other" },
           ]}
           onFilter={onFilter}
           onDownload={onDownload}
@@ -77,7 +78,7 @@ export function InquiryList({
         <Button
           variant="outlined"
           color="primary"
-          onClick={() => console.log("Open filter modal")}
+          onClick={() => console.log("Abrir modal de filtros")}
           className="flex items-center gap-2"
         >
           <Filter className="h-4 w-4" />
