@@ -78,7 +78,7 @@ export default function UserEditPage() {
   return (
     <div className="min-h-screen">
       <div className="container mx-auto">
-        <div className="mb-1 mt-4">
+        <div className="mb-1">
           <Button
             variant="ghost"
             size="sm"

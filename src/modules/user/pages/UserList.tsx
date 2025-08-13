@@ -101,13 +101,13 @@ export default function UserList() {
 
   return (
     <div className="min-h-screen">
-      <div className=" mt-6">
+      <div className="mb-4">
         <CustomBreadcrumb items={[{ label: "Inicio", href: "/" }]} />
         <h1 className="text-2xl font-bold text-primary">Usuarios</h1>
       </div>
 
       {/* Filtros para desktop */}
-      <div className=" mt-6 hidden md:block">
+      <div className="hidden md:block">
         <ReusableFilters
           fromDate={fromDate}
           toDate={toDate}

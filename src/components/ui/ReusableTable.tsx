@@ -86,11 +86,11 @@ export function ReusableTable<T extends Record<string, unknown>>({
       </div>
 
       {/* Tarjetas para móviles */}
-   <div className="sm:hidden space-y-4 p-4">
+   <div className="sm:hidden space-y-4">
   {data.map((row, rowIndex) => (
     <div
       key={rowIndex}
-      className="relative rounded-xl p-4 ring-1 ring-gray-200 bg-white"
+      className="relative rounded-xl p-4 ring-1 ring-gray-500 bg-white"
     >
       {/* Acciones superiores */}
       {renderActions && (

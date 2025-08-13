@@ -1,6 +1,5 @@
 import { Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CustomBreadcrumb } from "@/components/ui/CustomBreadcrumb";
 import { ReusableFilters } from "@/components/ui/ReusableFilters";
 import { ReusableTable } from "@/components/ui/ReusableTable";
 import { RowActions } from "@/components/ui/RowActions";
@@ -52,12 +51,8 @@ export function InquiryList({
 }: InquiryListProps) {
   return (
     <>
-      <div className="mt-6">
-        <CustomBreadcrumb items={[{ label: "Inicio", href: "/" }]} />
-        <h1 className="text-2xl font-bold text-primary">Consultas</h1>
-      </div>
-
-      <div className="mt-6 hidden md:block">
+      
+      <div className="hidden md:block">
         <ReusableFilters
           fromDate={fromDate}
           toDate={toDate}
@@ -94,9 +89,7 @@ export function InquiryList({
           total={total}
           onPageChange={setPage}
           onPageSizeChange={setPageSize}
-          renderActions={(row) => (
-            <RowActions onView={() => handleView(row)} />
-          )}
+          renderActions={(row) => <RowActions onView={() => handleView(row)} />}
         />
       </div>
     </>

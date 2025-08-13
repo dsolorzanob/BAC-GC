@@ -12,9 +12,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { ReusableTable } from "@/components/ui/ReusableTable";
 import type { BatchDetail } from "@/modules/inquiries/Interfaces/Inquires";
-import { Header } from "@/components/layouts/Header";
-import { SearchSidebar } from "@/components/layouts/SearchSidebar";
-import { ThemeSwitch } from "@/components/layouts/SwitchTheme";
 
 export function InquiryDetail() {
   const { titleConsulta, id } = useParams();

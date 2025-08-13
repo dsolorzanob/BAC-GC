@@ -1,13 +1,9 @@
 import { useState } from "react";
-import { Header } from "@/components/layouts/Header";
-import { SearchSidebar } from "@/components/layouts/SearchSidebar";
-import { ThemeSwitch } from "@/components/layouts/SwitchTheme";
-import { Button } from "@/components/ui/button";
-import { Search } from "lucide-react";
 import { reportesData } from "@/modules/inquiries/utils/staticReportes";
 import { InquiryList } from "@/modules/inquiries/components/InquiryList";
 import type { Report } from "@/modules/inquiries/Interfaces/Inquires";
 import { useNavigate } from "react-router-dom";
+import { CustomBreadcrumb } from "@/components/ui/CustomBreadcrumb";
 
 export default function InquiriesPage() {
   const [page, setPage] = useState(1);
@@ -64,6 +60,11 @@ export default function InquiriesPage() {
 
   return (
     <div className="min-h-screen w-full">
+      <div className="mb-4">
+        <CustomBreadcrumb items={[{ label: "Inicio", href: "/" }]} />
+        <h1 className="text-2xl font-bold text-primary">Consultas</h1>
+      </div>
+
       <InquiryList
         reportes={reportesData}
         page={page}
