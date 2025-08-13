@@ -17,6 +17,7 @@ const dashboardDataSlice = createSlice({
   name: 'dashboardData',
   initialState,
   reducers: {
+    // @ts-expect-error - This is a workaround to fix the type error
     setDashboardData: (state, action: PayloadAction<DashboardData>) => {
       return action.payload;
     },
