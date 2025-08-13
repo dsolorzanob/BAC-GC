@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { MoveLeft, Search, Download, Filter, RefreshCw } from "lucide-react";
 import { CustomBreadcrumb } from "@/components/ui/CustomBreadcrumb";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   Select,
   SelectContent,
@@ -10,14 +11,17 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { ReusableTable } from "@/components/ui/ReusableTable";
-import type { Report, BatchDetail } from "@/modules/inquiries/Interfaces/Inquires";
+import type { BatchDetail } from "@/modules/inquiries/Interfaces/Inquires";
+import { Header } from "@/components/layouts/Header";
+import { SearchSidebar } from "@/components/layouts/SearchSidebar";
+import { ThemeSwitch } from "@/components/layouts/SwitchTheme";
 
-interface InquiryDetailProps {
-  selectedBatch: Report;
-  onReturn: () => void;
-}
+export function InquiryDetail() {
+  const { titleConsulta, id } = useParams();
+  const navigate = useNavigate();
 
-export function InquiryDetail({ selectedBatch, onReturn }: InquiryDetailProps) {
+  console.log("Parámetros recibidos:", { titleConsulta, id });
+
   const detailData: BatchDetail[] = [
     {
       email: "philippe.reyes@pbs.group",
@@ -54,9 +58,9 @@ export function InquiryDetail({ selectedBatch, onReturn }: InquiryDetailProps) {
   ];
 
   return (
-    <div className="p-6">
+    <div className="">
       <Button
-        onClick={onReturn}
+        onClick={() => navigate("/admin/consultas")}
         variant="ghost"
         color="secondary"
         size="sm"
@@ -68,15 +72,17 @@ export function InquiryDetail({ selectedBatch, onReturn }: InquiryDetailProps) {
 
       <CustomBreadcrumb
         items={[
-          { label: "Inicio", href: "/admin/inquiries" },
-          { label: "Detalle", isCurrentPage: true },
+          { label: "Inicio", href: "/admin" },
+          { label: "Consultas", href: "/admin/consultas" },
+          { label: titleConsulta || "Detalle", isCurrentPage: true },
         ]}
       />
 
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold text-primary">
-          {selectedBatch.batch}
+          {titleConsulta || "Detalle de Consulta"}
         </h1>
+        <div className="text-sm text-muted-foreground">ID: {id || "N/A"}</div>
       </div>
 
       <div className="bg-white p-6 rounded-xl shadow-md mb-8 hidden md:flex flex-wrap gap-4 items-end">

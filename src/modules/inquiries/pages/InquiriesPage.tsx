@@ -5,9 +5,9 @@ import { ThemeSwitch } from "@/components/layouts/SwitchTheme";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import { reportesData } from "@/modules/inquiries/utils/staticReportes";
-import { InquiryDetail } from "@/modules/inquiries/pages/InquiryDetail";
 import { InquiryList } from "@/modules/inquiries/components/InquiryList";
 import type { Report } from "@/modules/inquiries/Interfaces/Inquires";
+import { useNavigate } from "react-router-dom";
 
 export default function InquiriesPage() {
   const [page, setPage] = useState(1);
@@ -16,10 +16,14 @@ export default function InquiriesPage() {
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("");
   const [type, setType] = useState("");
-
+  const navigate = useNavigate();
   const total = reportesData.length;
 
-  const handleSelectBatch = (row: Report) => setSelectedBatch(row);
+  const handleSelectBatch = (row: Report) => {
+    const url = `/admin/consultas/${encodeURIComponent(row.batch)}/${row.id}`;
+    console.log("Navegando a:", url);
+    navigate(url);
+  };
   const handleReturn = () => setSelectedBatch(null);
 
   const handleFilter = () => {
@@ -31,14 +35,15 @@ export default function InquiriesPage() {
   };
 
   const handleView = (row: Report) => {
-    console.log("Ver reporte:", row);
+    navigate(`/admin/consultas/${row.batch}-${row.status}-${row.quantity}`);
   };
 
   const listColumns = [
+    { key: "id", label: "ID" },
     {
       key: "batch",
       label: "Lote/Ciclo/Campaña",
-      render: (val: string, row: Report) => (
+      render: (val: string | number, row: Report) => (
         <span
           className="text-primary underline cursor-pointer"
           onClick={() => handleSelectBatch(row)}
@@ -58,47 +63,26 @@ export default function InquiriesPage() {
   ];
 
   return (
-    <div className="min-h-screen">
-      <Header>
-        <div className="ml-auto flex items-center justify-end space-x-4">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="md:hidden"
-            onClick={() => console.log("Abrir búsqueda móvil")}
-          >
-            <Search className="h-4 w-4" />
-          </Button>
-          <div className="hidden md:block">
-            <SearchSidebar onSearch={() => {}} />
-          </div>
-          <ThemeSwitch />
-        </div>
-      </Header>
-
-      {selectedBatch ? (
-        <InquiryDetail selectedBatch={selectedBatch} onReturn={handleReturn} />
-      ) : (
-        <InquiryList
-          reportes={reportesData}
-          page={page}
-          pageSize={pageSize}
-          total={total}
-          setPage={setPage}
-          setPageSize={setPageSize}
-          onSelectBatch={handleSelectBatch}
-          fromDate={fromDate}
-          toDate={toDate}
-          type={type}
-          setFromDate={setFromDate}
-          setToDate={setToDate}
-          setType={setType}
-          onFilter={handleFilter}
-          onDownload={handleDownload}
-          listColumns={listColumns}
-          handleView={handleView}
-        />
-      )}
+    <div className="min-h-screen w-full">
+      <InquiryList
+        reportes={reportesData}
+        page={page}
+        pageSize={pageSize}
+        total={total}
+        setPage={setPage}
+        setPageSize={setPageSize}
+        onSelectBatch={handleSelectBatch}
+        fromDate={fromDate}
+        toDate={toDate}
+        type={type}
+        setFromDate={setFromDate}
+        setToDate={setToDate}
+        setType={setType}
+        onFilter={handleFilter}
+        onDownload={handleDownload}
+        listColumns={listColumns}
+        handleView={handleView}
+      />
     </div>
   );
 }

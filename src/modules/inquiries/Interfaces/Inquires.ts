@@ -1,4 +1,5 @@
 export interface Report {
+  id: number;
   batch: string;
   status: string;
   quantity: string;
@@ -8,7 +9,7 @@ export interface Report {
   spam: string;
   bounced: string;
   unsubscribed: string;
-  [key: string]: string;
+  [key: string]: string | number;
 }
 
 export interface BatchDetail {

@@ -12,8 +12,7 @@ import InquiriesPage from "@/modules/inquiries/pages/InquiriesPage";
 import UserList from "@/modules/user/pages/UserList";
 import UserEditPage from "@/modules/user/pages/UserEditPage";
 import UserCreatePage from "@/modules/user/pages/UserCreatePage";
-
-
+import { InquiryDetail } from "@/modules/inquiries/pages/InquiryDetail";
 
 export const AppRouter = () => {
   return (
@@ -24,9 +23,11 @@ export const AppRouter = () => {
           <Route index element={<LoginPage />} />
           <Route path="signup" element={<SignUpPage />} />
           <Route path="reset-password/send-email" element={<SendEmailPage />} />
-          <Route path="reset-password/new-password" element={<NewPasswordPage />} />
+          <Route
+            path="reset-password/new-password"
+            element={<NewPasswordPage />}
+          />
           <Route path="reset-password/otp" element={<OTPPage />} />
-               
         </Route>
 
         {/* Rutas privadas */}
@@ -35,6 +36,10 @@ export const AppRouter = () => {
             <Route index element={<Dashboard />} />
             <Route path="publicidades" element={<DesignPage />} />
             <Route path="consultas" element={<InquiriesPage />} />
+            <Route
+              path="consultas/:title-consulta/:id"
+              element={<InquiryDetail />}
+            />
             <Route path="usuarios" element={<UserList />} />
             <Route path="usuarios/crear" element={<UserCreatePage />} />
             <Route path="usuarios/editar/:id" element={<UserEditPage />} />

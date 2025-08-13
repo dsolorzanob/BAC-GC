@@ -26,7 +26,7 @@ export const RowActions: React.FC<RowActionsProps> = ({
             onView();
           }}
           variant="ghost"
-          color="success"
+          color="secondary"
           size="sm"
           title="Ver"
         >
@@ -40,7 +40,7 @@ export const RowActions: React.FC<RowActionsProps> = ({
             onEdit();
           }}
           variant="ghost"
-          color="secondary"
+          color="info"
           size="icon"
           title="Editar"
         >

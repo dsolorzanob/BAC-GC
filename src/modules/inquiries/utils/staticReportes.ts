@@ -2,6 +2,7 @@ import type { Report } from "@/modules/inquiries/Interfaces/Inquires";
 
 export const reportesData: Report[] = [
   {
+    id: 1,
     batch: "CicloEstudiantes2023-01",
     status: "Procesado",
     quantity: "7,278",
@@ -13,6 +14,7 @@ export const reportesData: Report[] = [
     unsubscribed: "0",
   },
   {
+    id: 2,
     batch: "Campaña mes madres 2024",
     status: "Procesado",
     quantity: "100,000",
