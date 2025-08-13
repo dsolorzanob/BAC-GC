@@ -1,31 +1,30 @@
 import { Outlet } from "react-router-dom";
-import { cn } from "@/lib/utils";
-
-import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "./AppSidebar";
+import { Header } from "./Header";
+import { SidebarProvider } from "@/components/ui/sidebar";
+import { ThemeSwitch } from "./SwitchTheme";
+import { SearchSidebar } from "./SearchSidebar";
 
-interface Props {
-  children?: React.ReactNode;
-}
-
-export function MainLayout({ children }: Props) {
-  const defaultOpen = localStorage.getItem("sidebar_state") !== "false";
+export function MainLayout() {
   return (
-    <SidebarProvider defaultOpen={defaultOpen}>
-      <AppSidebar isOpen={defaultOpen} />
-      <div
-        id="content"
-        className={cn(
-          "ml-auto w-full max-w-full bg-[#F7F7F7]",
-          "peer-data-[state=collapsed]:w-[calc(100%-var(--sidebar-width-icon)-1rem)]",
-          "peer-data-[state=expanded]:w-[calc(100%-var(--sidebar-width))]",
-          "sm:transition-[width] sm:duration-200 sm:ease-linear",
-          "flex h-svh flex-col",
-          "group-data-[scroll-locked=1]/body:h-full",
-          "has-[main.fixed-main]:group-data-[scroll-locked=1]/body:h-svh"
-        )}
-      >
-        {children ? children : <Outlet />}
+    <SidebarProvider defaultOpen={true}>
+      <div className="flex h-screen w-full">
+        {/* Sidebar izquierdo */}
+        <AppSidebar />
+        {/* Contenido principal */}
+        <div className="flex-1 flex flex-col">
+          {/* Header arriba */}
+          <Header>
+            <div className="ml-auto flex items-center justify-end space-x-4">
+              <SearchSidebar onSearch={() => {}} />
+              <ThemeSwitch />
+            </div>
+          </Header>
+          {/* Contenido principal (Outlet/Children) */}
+          <main className="flex-1 bg-gray-50 p-6 ">
+            <Outlet />
+          </main>
+        </div>
       </div>
     </SidebarProvider>
   );
