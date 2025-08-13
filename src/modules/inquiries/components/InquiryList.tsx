@@ -52,12 +52,12 @@ export function InquiryList({
 }: InquiryListProps) {
   return (
     <>
-      <div className="px-6 mt-6">
+      <div className="mt-6">
         <CustomBreadcrumb items={[{ label: "Inicio", href: "/" }]} />
         <h1 className="text-2xl font-bold text-primary">Consultas</h1>
       </div>
 
-      <div className="px-6 mt-6 hidden md:block">
+      <div className="mt-6 hidden md:block">
         <ReusableFilters
           fromDate={fromDate}
           toDate={toDate}
@@ -74,7 +74,7 @@ export function InquiryList({
         />
       </div>
 
-      <div className="px-6 mt-4 flex justify-end md:hidden">
+      <div className="mt-4 flex justify-end md:hidden">
         <Button
           variant="outlined"
           color="primary"
@@ -85,7 +85,7 @@ export function InquiryList({
         </Button>
       </div>
 
-      <div className="px-6 mt-4 pb-10">
+      <div className="mt-4 pb-10">
         <ReusableTable<Report>
           columns={listColumns}
           data={reportes}

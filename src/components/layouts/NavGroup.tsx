@@ -177,16 +177,35 @@ const SidebarMenuCollapsedDropdown = ({
 function checkIsActive(href: string, item: NavItem, mainNav = false) {
   const itemUrl =
     typeof item.url === "string" ? item.url : item.url?.pathname || "";
-  return (
-    href === itemUrl || // /endpint?search=param
-    href.split("?")[0] === itemUrl || // endpoint
-    !!item?.items?.filter((i) => {
-      const subItemUrl =
-        typeof i.url === "string" ? i.url : i.url.pathname || "";
-      return subItemUrl === href;
-    }).length || // if child nav is active
-    (mainNav &&
-      href.split("/")[1] !== "" &&
-      href.split("/")[1] === itemUrl.split("/")[1])
-  );
+  
+  const hrefPath = href.split("?")[0];
+  const itemUrlPath = itemUrl.split("?")[0];
+  
+  // Exact match
+  if (hrefPath === itemUrlPath) {
+    return true;
+  }
+  
+  // For nested routes, only mark as active if it's a direct child
+  // This prevents /admin from being active when on /admin/consultas/123
+  if (itemUrlPath === "/admin") {
+    // Dashboard should only be active when exactly on /admin
+    return hrefPath === "/admin";
+  }
+  
+  // For other items, check if current path starts with their URL
+  // but only if they have a specific path (not just /admin)
+  if (itemUrlPath !== "/admin" && hrefPath.startsWith(itemUrlPath + "/")) {
+    return true;
+  }
+  
+  // Check if any child items are active
+  if (item?.items) {
+    return item.items.some((i) => {
+      const subItemUrl = typeof i.url === "string" ? i.url : i.url.pathname || "";
+      return subItemUrl === hrefPath;
+    });
+  }
+  
+  return false;
 }

@@ -44,13 +44,7 @@ export default function UserCreatePage() {
 
   return (
     <div className="min-h-screen">
-      <Header>
-        <div className="ml-auto flex items-center justify-end space-x-4">
-          <SearchSidebar onSearch={() => {}} />
-          <ThemeSwitch />
-        </div>
-      </Header>
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         <div className="mb-1 mt-4">
           <Button
             variant="ghost"

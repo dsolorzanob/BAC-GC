@@ -32,7 +32,6 @@ export default function UserEditPage() {
     navigate("/admin/usuarios");
   };
 
-
   useEffect(() => {
     if (!id) return;
 
@@ -78,13 +77,7 @@ export default function UserEditPage() {
 
   return (
     <div className="min-h-screen">
-      <Header>
-        <div className="ml-auto flex items-center justify-end space-x-4">
-          <SearchSidebar onSearch={() => {}} />
-          <ThemeSwitch />
-        </div>
-      </Header>
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto">
         <div className="mb-1 mt-4">
           <Button
             variant="ghost"
@@ -115,30 +108,48 @@ export default function UserEditPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Nombre</label>
-                  <Input placeholder="Nombre del usuario" {...register("nombre")} />
+                  <Input
+                    placeholder="Nombre del usuario"
+                    {...register("nombre")}
+                  />
                   {errors.nombre && (
-                    <p className="text-sm text-red-500">{errors.nombre.message}</p>
+                    <p className="text-sm text-red-500">
+                      {errors.nombre.message}
+                    </p>
                   )}
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Apellido</label>
-                  <Input placeholder="Apellido del usuario" {...register("apellido")} />
+                  <Input
+                    placeholder="Apellido del usuario"
+                    {...register("apellido")}
+                  />
                   {errors.apellido && (
-                    <p className="text-sm text-red-500">{errors.apellido.message}</p>
+                    <p className="text-sm text-red-500">
+                      {errors.apellido.message}
+                    </p>
                   )}
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Email</label>
-                  <Input type="email" placeholder="email@ejemplo.com" {...register("email")} />
+                  <Input
+                    type="email"
+                    placeholder="email@ejemplo.com"
+                    {...register("email")}
+                  />
                   {errors.email && (
-                    <p className="text-sm text-red-500">{errors.email.message}</p>
+                    <p className="text-sm text-red-500">
+                      {errors.email.message}
+                    </p>
                   )}
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Teléfono</label>
                   <Input placeholder="+50212345678" {...register("telefono")} />
                   {errors.telefono && (
-                    <p className="text-sm text-red-500">{errors.telefono.message}</p>
+                    <p className="text-sm text-red-500">
+                      {errors.telefono.message}
+                    </p>
                   )}
                 </div>
                 <div className="space-y-2">
@@ -158,7 +169,9 @@ export default function UserEditPage() {
                     {...register("password")}
                   />
                   {errors.password && (
-                    <p className="text-sm text-red-500">{errors.password.message}</p>
+                    <p className="text-sm text-red-500">
+                      {errors.password.message}
+                    </p>
                   )}
                 </div>
                 <div className="space-y-2">
@@ -168,7 +181,9 @@ export default function UserEditPage() {
                     {...register("confirmPassword")}
                   />
                   {errors.confirmPassword && (
-                    <p className="text-sm text-red-500">{errors.confirmPassword.message}</p>
+                    <p className="text-sm text-red-500">
+                      {errors.confirmPassword.message}
+                    </p>
                   )}
                 </div>
               </div>

@@ -101,29 +101,13 @@ export default function UserList() {
 
   return (
     <div className="min-h-screen">
-      <Header>
-        <div className="ml-auto flex items-center justify-end space-x-4">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="md:hidden"
-            onClick={() => console.log("Abrir búsqueda móvil")}
-          >
-            <Search className="h-4 w-4" />
-          </Button>
-          <div className="hidden md:block">
-            <SearchSidebar onSearch={() => {}} />
-          </div>
-          <ThemeSwitch />
-        </div>
-      </Header>
-      <div className="px-6 mt-6">
+      <div className=" mt-6">
         <CustomBreadcrumb items={[{ label: "Inicio", href: "/" }]} />
         <h1 className="text-2xl font-bold text-primary">Usuarios</h1>
       </div>
 
       {/* Filtros para desktop */}
-      <div className="px-6 mt-6 hidden md:block">
+      <div className=" mt-6 hidden md:block">
         <ReusableFilters
           fromDate={fromDate}
           toDate={toDate}
@@ -154,7 +138,7 @@ export default function UserList() {
       </div>
 
       {/* Tabla con datos */}
-      <div className="px-6 mt-4 pb-10">
+      <div className=" mt-4 pb-10">
         <ReusableTable<Users>
           columns={columns}
           data={data}
