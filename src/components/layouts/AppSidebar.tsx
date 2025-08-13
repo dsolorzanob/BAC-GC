@@ -17,17 +17,16 @@ interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
 
 function SidebarContentWithConditionalBg() {
   const { state } = useSidebar();
-  
+
   return (
-    <SidebarContent className={state === "collapsed" ? "bg-primary-dark text-white" : ""}>
+    <SidebarContent
+      className={state === "collapsed" ? "bg-primary-dark text-white" : ""}
+    >
       {sidebarData.navGroups
         .map((group) => ({
           ...group,
           items: group.items.map((item) => ({
             ...item,
-            disabled: ["Dashboard", "Settings", "Configuración"].includes(
-              item.title
-            ),
           })),
         }))
         .map((props) => (
