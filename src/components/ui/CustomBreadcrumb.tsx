@@ -1,5 +1,5 @@
-import * as React from "react"
-import { ChevronRight } from "lucide-react"
+import * as React from 'react';
+import { ChevronRight } from 'lucide-react';
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -7,19 +7,18 @@ import {
   BreadcrumbLink,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "./breadcrumb"
-import { cn } from "@/lib/utils"
+} from './breadcrumb';
 
 export interface BreadcrumbItem {
-  label: string
-  href?: string
-  isCurrentPage?: boolean
+  label: string;
+  href?: string;
+  isCurrentPage?: boolean;
 }
 
 interface CustomBreadcrumbProps {
-  items: BreadcrumbItem[]
-  separator?: React.ReactNode
-  className?: string
+  items: BreadcrumbItem[];
+  separator?: React.ReactNode;
+  className?: string;
 }
 
 export function CustomBreadcrumb({
@@ -36,8 +35,8 @@ export function CustomBreadcrumb({
               {item.isCurrentPage || index === items.length - 1 ? (
                 <BreadcrumbPage>{item.label}</BreadcrumbPage>
               ) : (
-                <BreadcrumbLink 
-                  href={item.href || "#"}
+                <BreadcrumbLink
+                  href={item.href || '#'}
                   className="hover:text-info transition-colors duration-200"
                 >
                   {item.label}
@@ -51,15 +50,15 @@ export function CustomBreadcrumb({
         ))}
       </BreadcrumbList>
     </Breadcrumb>
-  )
+  );
 }
 
 // Alternative component with simpler props for common use cases
 interface SimpleBreadcrumbProps {
-  items: Array<{ label: string; href?: string }>
-  currentPage: string
-  separator?: React.ReactNode
-  className?: string
+  items: Array<{ label: string; href?: string }>;
+  currentPage: string;
+  separator?: React.ReactNode;
+  className?: string;
 }
 
 export function SimpleBreadcrumb({
@@ -71,7 +70,7 @@ export function SimpleBreadcrumb({
   const breadcrumbItems: BreadcrumbItem[] = [
     ...items,
     { label: currentPage, isCurrentPage: true },
-  ]
+  ];
 
   return (
     <CustomBreadcrumb
@@ -79,5 +78,5 @@ export function SimpleBreadcrumb({
       separator={separator}
       className={className}
     />
-  )
-} 
+  );
+}

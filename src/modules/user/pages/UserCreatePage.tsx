@@ -1,17 +1,15 @@
-import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { PasswordInput } from "@/components/ui/password";
-import { ArrowLeft } from "lucide-react";
-import { createUserSchema } from "../constants/create-user-schema";
-import type { CreateUser } from "../interfaces/create-user";
-import { Header } from "@/components/layouts/Header";
-import { SearchSidebar } from "@/components/layouts/SearchSidebar";
-import { ThemeSwitch } from "@/components/layouts/SwitchTheme";
-import { CustomBreadcrumb } from "@/components/ui/CustomBreadcrumb";
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import type { FieldErrors } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { PasswordInput } from '@/components/ui/password';
+import { ArrowLeft } from 'lucide-react';
+import { createUserSchema } from '../constants/create-user-schema';
+import type { CreateUser } from '../interfaces/create-user';
+import { CustomBreadcrumb } from '@/components/ui/CustomBreadcrumb';
 
 export default function UserCreatePage() {
   const navigate = useNavigate();
@@ -25,21 +23,21 @@ export default function UserCreatePage() {
   });
 
   const handleBack = () => {
-    navigate("/admin/usuarios");
+    navigate('/admin/usuarios');
   };
 
   const onSubmit = async (data: CreateUser) => {
     try {
-      console.log("Form data:", data);
+      console.log('Form data:', data);
       // Aquí iría la lógica para crear el usuario
-      navigate("/admin/usuarios");
+      navigate('/admin/usuarios');
     } catch (error) {
-      console.error("Error creating user:", error);
+      console.error('Error creating user:', error);
     }
   };
 
-  const onError = (errors: any) => {
-    console.error("Form errors:", errors);
+  const onError = (errors: FieldErrors<CreateUser>) => {
+    console.error('Form errors:', errors);
   };
 
   return (
@@ -60,8 +58,8 @@ export default function UserCreatePage() {
         <div className="mb-4">
           <CustomBreadcrumb
             items={[
-              { label: "Home", href: "/admin/usuarios" },
-              { label: "Crear Usuario", isCurrentPage: true },
+              { label: 'Home', href: '/admin/usuarios' },
+              { label: 'Crear Usuario', isCurrentPage: true },
             ]}
           />
           <h1 className="text-2xl font-bold text-primary">Crear Usuario</h1>
@@ -77,7 +75,7 @@ export default function UserCreatePage() {
                   <label className="text-sm font-medium">Nombre</label>
                   <Input
                     placeholder="Nombre del usuario"
-                    {...register("nombre")}
+                    {...register('nombre')}
                   />
                   {errors.nombre && (
                     <p className="text-sm text-red-500">
@@ -89,7 +87,7 @@ export default function UserCreatePage() {
                   <label className="text-sm font-medium">Apellido</label>
                   <Input
                     placeholder="Apellido del usuario"
-                    {...register("apellido")}
+                    {...register('apellido')}
                   />
                   {errors.apellido && (
                     <p className="text-sm text-red-500">
@@ -102,7 +100,7 @@ export default function UserCreatePage() {
                   <Input
                     placeholder="email@ejemplo.com"
                     type="email"
-                    {...register("email")}
+                    {...register('email')}
                   />
                   {errors.email && (
                     <p className="text-sm text-red-500">
@@ -112,7 +110,7 @@ export default function UserCreatePage() {
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Teléfono</label>
-                  <Input placeholder="+1234567890" {...register("telefono")} />
+                  <Input placeholder="+1234567890" {...register('telefono')} />
                   {errors.telefono && (
                     <p className="text-sm text-red-500">
                       {errors.telefono.message}
@@ -121,7 +119,7 @@ export default function UserCreatePage() {
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Rol</label>
-                  <Input placeholder="Usuario" {...register("rol")} />
+                  <Input placeholder="Usuario" {...register('rol')} />
                   {errors.rol && (
                     <p className="text-sm text-red-500">{errors.rol.message}</p>
                   )}
@@ -133,7 +131,7 @@ export default function UserCreatePage() {
                   <PasswordInput
                     label="Contraseña"
                     id="password"
-                    {...register("password")}
+                    {...register('password')}
                   />
                   {errors.password && (
                     <p className="text-sm text-red-500">
@@ -145,7 +143,7 @@ export default function UserCreatePage() {
                   <PasswordInput
                     label="Confirmar contraseña"
                     id="confirmPassword"
-                    {...register("confirmPassword")}
+                    {...register('confirmPassword')}
                   />
                   {errors.confirmPassword && (
                     <p className="text-sm text-error">
@@ -170,7 +168,7 @@ export default function UserCreatePage() {
                   color="info"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Creando..." : "Crear Usuario"}
+                  {isSubmitting ? 'Creando...' : 'Crear Usuario'}
                 </Button>
               </div>
             </form>

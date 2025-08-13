@@ -1,19 +1,16 @@
-import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { PasswordInput } from "@/components/ui/password";
-import { ArrowLeft } from "lucide-react";
-import { createUserSchema } from "../constants/create-user-schema";
-import type { CreateUser } from "../interfaces/create-user";
-import { Header } from "@/components/layouts/Header";
-import { SearchSidebar } from "@/components/layouts/SearchSidebar";
-import { ThemeSwitch } from "@/components/layouts/SwitchTheme";
-import { CustomBreadcrumb } from "@/components/ui/CustomBreadcrumb";
-import type { FieldErrors } from "react-hook-form";
+import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { PasswordInput } from '@/components/ui/password';
+import { ArrowLeft } from 'lucide-react';
+import { createUserSchema } from '../constants/create-user-schema';
+import type { CreateUser } from '../interfaces/create-user';
+import { CustomBreadcrumb } from '@/components/ui/CustomBreadcrumb';
+import type { FieldErrors } from 'react-hook-form';
 
 export default function UserEditPage() {
   const navigate = useNavigate();
@@ -29,7 +26,7 @@ export default function UserEditPage() {
   });
 
   const handleBack = () => {
-    navigate("/admin/usuarios");
+    navigate('/admin/usuarios');
   };
 
   useEffect(() => {
@@ -42,20 +39,20 @@ export default function UserEditPage() {
 
         // Simulamos datos:
         const user = {
-          nombre: "Ana",
-          apellido: "Gomez",
-          email: "ana.gomez@gmail.com",
-          telefono: "+50212345678",
-          rol: "Usuario",
-          password: "",
-          confirmPassword: "",
+          nombre: 'Ana',
+          apellido: 'Gomez',
+          email: 'ana.gomez@gmail.com',
+          telefono: '+50212345678',
+          rol: 'Usuario',
+          password: '',
+          confirmPassword: '',
         };
 
         Object.entries(user).forEach(([key, value]) =>
           setValue(key as keyof CreateUser, value)
         );
       } catch (error) {
-        console.error("Error al cargar el usuario:", error);
+        console.error('Error al cargar el usuario:', error);
       }
     };
 
@@ -64,15 +61,15 @@ export default function UserEditPage() {
 
   const onSubmit = async (data: CreateUser) => {
     try {
-      console.log("Actualizando usuario con ID:", id, data);
-      navigate("/admin/usuarios");
+      console.log('Actualizando usuario con ID:', id, data);
+      navigate('/admin/usuarios');
     } catch (error) {
-      console.error("Error actualizando usuario:", error);
+      console.error('Error actualizando usuario:', error);
     }
   };
 
   const onError = (errors: FieldErrors<CreateUser>) => {
-    console.error("Errores del formulario:", errors);
+    console.error('Errores del formulario:', errors);
   };
 
   return (
@@ -93,8 +90,8 @@ export default function UserEditPage() {
         <div className="mb-4">
           <CustomBreadcrumb
             items={[
-              { label: "Home", href: "/admin/usuarios" },
-              { label: "Editar Usuario", isCurrentPage: true },
+              { label: 'Home', href: '/admin/usuarios' },
+              { label: 'Editar Usuario', isCurrentPage: true },
             ]}
           />
           <h1 className="text-2xl font-bold text-primary">Editar Usuario</h1>
@@ -110,7 +107,7 @@ export default function UserEditPage() {
                   <label className="text-sm font-medium">Nombre</label>
                   <Input
                     placeholder="Nombre del usuario"
-                    {...register("nombre")}
+                    {...register('nombre')}
                   />
                   {errors.nombre && (
                     <p className="text-sm text-red-500">
@@ -122,7 +119,7 @@ export default function UserEditPage() {
                   <label className="text-sm font-medium">Apellido</label>
                   <Input
                     placeholder="Apellido del usuario"
-                    {...register("apellido")}
+                    {...register('apellido')}
                   />
                   {errors.apellido && (
                     <p className="text-sm text-red-500">
@@ -135,7 +132,7 @@ export default function UserEditPage() {
                   <Input
                     type="email"
                     placeholder="email@ejemplo.com"
-                    {...register("email")}
+                    {...register('email')}
                   />
                   {errors.email && (
                     <p className="text-sm text-red-500">
@@ -145,7 +142,7 @@ export default function UserEditPage() {
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Teléfono</label>
-                  <Input placeholder="+50212345678" {...register("telefono")} />
+                  <Input placeholder="+50212345678" {...register('telefono')} />
                   {errors.telefono && (
                     <p className="text-sm text-red-500">
                       {errors.telefono.message}
@@ -154,7 +151,7 @@ export default function UserEditPage() {
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Rol</label>
-                  <Input placeholder="Administrador" {...register("rol")} />
+                  <Input placeholder="Administrador" {...register('rol')} />
                   {errors.rol && (
                     <p className="text-sm text-red-500">{errors.rol.message}</p>
                   )}
@@ -166,7 +163,7 @@ export default function UserEditPage() {
                   <PasswordInput
                     label="Nueva contraseña"
                     id="password"
-                    {...register("password")}
+                    {...register('password')}
                   />
                   {errors.password && (
                     <p className="text-sm text-red-500">
@@ -178,7 +175,7 @@ export default function UserEditPage() {
                   <PasswordInput
                     label="Confirmar nueva contraseña"
                     id="confirmPassword"
-                    {...register("confirmPassword")}
+                    {...register('confirmPassword')}
                   />
                   {errors.confirmPassword && (
                     <p className="text-sm text-red-500">
@@ -203,7 +200,7 @@ export default function UserEditPage() {
                   color="info"
                   disabled={isSubmitting}
                 >
-                  {isSubmitting ? "Actualizando..." : "Actualizar Usuario"}
+                  {isSubmitting ? 'Actualizando...' : 'Actualizar Usuario'}
                 </Button>
               </div>
             </form>

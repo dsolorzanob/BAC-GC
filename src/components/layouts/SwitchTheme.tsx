@@ -1,23 +1,22 @@
-import { useEffect, useState } from "react";
-import { Check, Moon, Sun, Monitor } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { useEffect, useState } from 'react';
+import { Check, Moon, Sun, Monitor } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { useTheme } from "@/hooks/useStore";
+} from '@/components/ui/dropdown-menu';
 
 export function ThemeSwitch() {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState('light');
   /* Update theme-color meta tag
    * when theme is updated */
   useEffect(() => {
-    const themeColor = theme === "dark" ? "#020817" : "#fff";
+    const themeColor = theme === 'dark' ? '#020817' : '#fff';
     const metaThemeColor = document.querySelector("meta[name='theme-color']");
-    if (metaThemeColor) metaThemeColor.setAttribute("content", themeColor);
+    if (metaThemeColor) metaThemeColor.setAttribute('content', themeColor);
   }, [theme]);
 
   return (
@@ -30,28 +29,28 @@ export function ThemeSwitch() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+        <DropdownMenuItem onClick={() => setTheme('light')}>
           <Sun className="mr-2 h-4 w-4" />
           Claro
           <Check
             size={14}
-            className={cn("ml-auto", theme !== "light" && "hidden")}
+            className={cn('ml-auto', theme !== 'light' && 'hidden')}
           />
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
+        <DropdownMenuItem onClick={() => setTheme('dark')}>
           <Moon className="mr-2 h-4 w-4" />
           Oscuro
           <Check
             size={14}
-            className={cn("ml-auto", theme !== "dark" && "hidden")}
+            className={cn('ml-auto', theme !== 'dark' && 'hidden')}
           />
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
+        <DropdownMenuItem onClick={() => setTheme('system')}>
           <Monitor className="mr-2 h-4 w-4" />
           Sistema
           <Check
             size={14}
-            className={cn("ml-auto", theme !== "system" && "hidden")}
+            className={cn('ml-auto', theme !== 'system' && 'hidden')}
           />
         </DropdownMenuItem>
       </DropdownMenuContent>

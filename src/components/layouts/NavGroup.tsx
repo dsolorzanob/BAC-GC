@@ -1,10 +1,10 @@
-import { Link, useLocation } from "react-router-dom";
-import { ChevronRight } from "lucide-react";
+import { Link, useLocation } from 'react-router-dom';
+import { ChevronRight } from 'lucide-react';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible";
+} from '@/components/ui/collapsible';
 import {
   SidebarGroup,
   SidebarGroupLabel,
@@ -15,8 +15,8 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   useSidebar,
-} from "@/components/ui/sidebar";
-import { Badge } from "../ui/badge";
+} from '@/components/ui/sidebar';
+import { Badge } from '../ui/badge';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,14 +24,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+} from '../ui/dropdown-menu';
 import {
   type NavCollapsible,
   type NavItem,
   type NavLink,
   type NavGroup,
-} from "./types";
-import type { ReactNode } from "react";
+} from './types';
+import type { ReactNode } from 'react';
 
 export function NavGroup({ title, items }: NavGroup) {
   const { state, isMobile } = useSidebar();
@@ -41,13 +41,13 @@ export function NavGroup({ title, items }: NavGroup) {
     <SidebarGroup>
       <SidebarGroupLabel>{title}</SidebarGroupLabel>
       <SidebarMenu>
-        {items.map((item) => {
+        {items.map(item => {
           const key = `${item.title}-${item.url}`;
 
           if (!item.items)
             return <SidebarMenuLink key={key} item={item} href={href} />;
 
-          if (state === "collapsed" && !isMobile)
+          if (state === 'collapsed' && !isMobile)
             return (
               <SidebarMenuCollapsedDropdown key={key} item={item} href={href} />
             );
@@ -72,7 +72,11 @@ const SidebarMenuLink = ({ item, href }: { item: NavLink; href: string }) => {
         isActive={checkIsActive(href, item)}
         tooltip={item.title}
       >
-        <Link to={item.url} onClick={() => setOpenMobile(false)} className={`${checkIsActive(href, item) ? "bg-primary text-primary-foreground" : ""}`}>
+        <Link
+          to={item.url}
+          onClick={() => setOpenMobile(false)}
+          className={`${checkIsActive(href, item) ? 'bg-primary text-primary-foreground' : ''}`}
+        >
           {item.icon && <item.icon />}
           <span>{item.title}</span>
           {item.badge && <NavBadge>{item.badge}</NavBadge>}
@@ -93,7 +97,7 @@ const SidebarMenuCollapsible = ({
   return (
     <Collapsible
       asChild
-      defaultOpen={checkIsActive(href, item, true)}
+      defaultOpen={checkIsActive(href, item)}
       className="group/collapsible"
     >
       <SidebarMenuItem>
@@ -107,7 +111,7 @@ const SidebarMenuCollapsible = ({
         </CollapsibleTrigger>
         <CollapsibleContent className="CollapsibleContent">
           <SidebarMenuSub>
-            {item.items.map((subItem) => (
+            {item.items.map(subItem => (
               <SidebarMenuSubItem key={subItem.title}>
                 <SidebarMenuSubButton
                   asChild
@@ -151,14 +155,14 @@ const SidebarMenuCollapsedDropdown = ({
         </DropdownMenuTrigger>
         <DropdownMenuContent side="right" align="start" sideOffset={4}>
           <DropdownMenuLabel>
-            {item.title} {item.badge ? `(${item.badge})` : ""}
+            {item.title} {item.badge ? `(${item.badge})` : ''}
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          {item.items.map((sub) => (
+          {item.items.map(sub => (
             <DropdownMenuItem key={`${sub.title}-${sub.url}`} asChild>
               <Link
                 to={sub.url}
-                className={`${checkIsActive(href, sub) ? "bg-secondary" : ""}`}
+                className={`${checkIsActive(href, sub) ? 'bg-secondary' : ''}`}
               >
                 {sub.icon && <sub.icon />}
                 <span className="max-w-52 text-wrap">{sub.title}</span>
@@ -174,38 +178,39 @@ const SidebarMenuCollapsedDropdown = ({
   );
 };
 
-function checkIsActive(href: string, item: NavItem, mainNav = false) {
+function checkIsActive(href: string, item: NavItem) {
   const itemUrl =
-    typeof item.url === "string" ? item.url : item.url?.pathname || "";
-  
-  const hrefPath = href.split("?")[0];
-  const itemUrlPath = itemUrl.split("?")[0];
-  
+    typeof item.url === 'string' ? item.url : item.url?.pathname || '';
+
+  const hrefPath = href.split('?')[0];
+  const itemUrlPath = itemUrl.split('?')[0];
+
   // Exact match
   if (hrefPath === itemUrlPath) {
     return true;
   }
-  
+
   // For nested routes, only mark as active if it's a direct child
   // This prevents /admin from being active when on /admin/consultas/123
-  if (itemUrlPath === "/admin") {
+  if (itemUrlPath === '/admin') {
     // Dashboard should only be active when exactly on /admin
-    return hrefPath === "/admin";
+    return hrefPath === '/admin';
   }
-  
+
   // For other items, check if current path starts with their URL
   // but only if they have a specific path (not just /admin)
-  if (itemUrlPath !== "/admin" && hrefPath.startsWith(itemUrlPath + "/")) {
+  if (itemUrlPath !== '/admin' && hrefPath.startsWith(itemUrlPath + '/')) {
     return true;
   }
-  
+
   // Check if any child items are active
   if (item?.items) {
-    return item.items.some((i) => {
-      const subItemUrl = typeof i.url === "string" ? i.url : i.url.pathname || "";
+    return item.items.some(i => {
+      const subItemUrl =
+        typeof i.url === 'string' ? i.url : i.url.pathname || '';
       return subItemUrl === hrefPath;
     });
   }
-  
+
   return false;
 }

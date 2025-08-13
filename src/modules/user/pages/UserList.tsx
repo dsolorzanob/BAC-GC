@@ -1,14 +1,11 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Filter, Search } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { CustomBreadcrumb } from "@/components/ui/CustomBreadcrumb";
-import { ReusableFilters } from "@/components/ui/ReusableFilters";
-import { ReusableTable } from "@/components/ui/ReusableTable";
-import { RowActions } from "@/components/ui/RowActions";
-import { Header } from "@/components/layouts/Header";
-import { SearchSidebar } from "@/components/layouts/SearchSidebar";
-import { ThemeSwitch } from "@/components/layouts/SwitchTheme";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Filter } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { CustomBreadcrumb } from '@/components/ui/CustomBreadcrumb';
+import { ReusableFilters } from '@/components/ui/ReusableFilters';
+import { ReusableTable } from '@/components/ui/ReusableTable';
+import { RowActions } from '@/components/ui/RowActions';
 
 type TableColumn<T> = {
   key: keyof T | string;
@@ -31,43 +28,43 @@ export default function UserList() {
   const [pageSize, setPageSize] = useState(10);
   const total = 4;
 
-  const [fromDate, setFromDate] = useState("");
-  const [toDate, setToDate] = useState("");
-  const [type, setType] = useState("");
+  const [fromDate, setFromDate] = useState('');
+  const [toDate, setToDate] = useState('');
+  const [type, setType] = useState('');
 
   const data: Users[] = [
     {
       id: 1,
-      nombre: "Juan",
-      apellido: "Perez",
-      email: "juan@gmail.com",
-      rol: "Admin",
+      nombre: 'Juan',
+      apellido: 'Perez',
+      email: 'juan@gmail.com',
+      rol: 'Admin',
     },
     {
       id: 2,
-      nombre: "Maria",
-      apellido: "Gomez",
-      email: "maria@gmail.com",
-      rol: "Usuario",
+      nombre: 'Maria',
+      apellido: 'Gomez',
+      email: 'maria@gmail.com',
+      rol: 'Usuario',
     },
     {
       id: 3,
-      nombre: "Pedro",
-      apellido: "Gomez",
-      email: "pedro@gmail.com",
-      rol: "Usuario",
+      nombre: 'Pedro',
+      apellido: 'Gomez',
+      email: 'pedro@gmail.com',
+      rol: 'Usuario',
     },
     {
       id: 4,
-      nombre: "Ana",
-      apellido: "Gomez",
-      email: "ana@gmail.com",
-      rol: "Usuario",
+      nombre: 'Ana',
+      apellido: 'Gomez',
+      email: 'ana@gmail.com',
+      rol: 'Usuario',
     },
   ];
 
   const handleView = (user: Users) => {
-    console.log("Ver usuario:", user);
+    console.log('Ver usuario:', user);
   };
 
   const handleEdit = (user: Users) => {
@@ -79,30 +76,30 @@ export default function UserList() {
       `¿Eliminar a ${user.nombre} ${user.apellido}?`
     );
     if (confirmDelete) {
-      console.log("Usuario eliminado:", user.id);
+      console.log('Usuario eliminado:', user.id);
     }
   };
 
   const handleFilter = () => {
-    console.log("Filtrando por:", fromDate, toDate, type);
+    console.log('Filtrando por:', fromDate, toDate, type);
   };
 
   const handleDownload = () => {
-    console.log("Descargando reporte...");
+    console.log('Descargando reporte...');
   };
 
   const columns: TableColumn<Users>[] = [
-    { key: "id", label: "ID" },
-    { key: "nombre", label: "Nombre" },
-    { key: "apellido", label: "Apellido" },
-    { key: "email", label: "Email" },
-    { key: "rol", label: "Rol" },
+    { key: 'id', label: 'ID' },
+    { key: 'nombre', label: 'Nombre' },
+    { key: 'apellido', label: 'Apellido' },
+    { key: 'email', label: 'Email' },
+    { key: 'rol', label: 'Rol' },
   ];
 
   return (
     <div className="min-h-screen">
       <div className="mb-4">
-        <CustomBreadcrumb items={[{ label: "Inicio", href: "/" }]} />
+        <CustomBreadcrumb items={[{ label: 'Inicio', href: '/' }]} />
         <h1 className="text-2xl font-bold text-primary">Usuarios</h1>
       </div>
 
@@ -116,8 +113,8 @@ export default function UserList() {
           selectedOption={type}
           onSelectChange={setType}
           selectOptions={[
-            { label: "Administrador", value: "Admin" },
-            { label: "Usuario", value: "Usuario" },
+            { label: 'Administrador', value: 'Admin' },
+            { label: 'Usuario', value: 'Usuario' },
           ]}
           onFilter={handleFilter}
           onDownload={handleDownload}
@@ -129,7 +126,7 @@ export default function UserList() {
         <Button
           variant="outlined"
           color="primary"
-          onClick={() => console.log("Abrir filtros en móvil")}
+          onClick={() => console.log('Abrir filtros en móvil')}
           className="flex items-center gap-2"
         >
           <Filter className="h-4 w-4" />
@@ -147,7 +144,7 @@ export default function UserList() {
           total={total}
           onPageChange={setPage}
           onPageSizeChange={setPageSize}
-          renderActions={(row) => (
+          renderActions={row => (
             <RowActions
               onEdit={() => handleEdit(row)}
               onDelete={() => handleDelete(row)}
