@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "test": "vitest",
     "test:ci": "vitest run",
-    "type-check": "tsc --noEmit",
+    "type-check": "tsc --noEmit --project tsconfig.app.json",
     "prepare": "husky"
   },
   "lint-staged": {

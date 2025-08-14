@@ -1,10 +1,6 @@
 import { Shovel } from 'lucide-react';
 
 export function DesignPage() {
-  const a: number = 'abc';
-  let b: string = 'abc';
-  b = a;
-  console.log(b);
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="flex flex-col items-center justify-center min-h-[calc(100vh-80px)] gap-4">

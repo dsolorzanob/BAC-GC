@@ -1,18 +1,18 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { MainLayout } from "@/components/layouts/MainLayout";
-import SignUpPage from "@/modules/authentication/pages/SignUp";
-import LoginPage from "@/modules/authentication/pages/Login";
-import NewPasswordPage from "@/modules/authentication/pages/NewPassword";
-import SendEmailPage from "@/modules/authentication/pages/ResetPassword";
-import OTPPage from "@/modules/authentication/pages/OTP";
-import { PrivateRoute } from "@/router/PrivateRoute";
-import { Dashboard } from "@/modules/dashboard/pages/Dashboard";
-import { DesignPage } from "@/modules/design/pages/DesignPage";
-import InquiriesPage from "@/modules/inquiries/pages/InquiriesPage";
-import UserList from "@/modules/user/pages/UserList";
-import UserEditPage from "@/modules/user/pages/UserEditPage";
-import UserCreatePage from "@/modules/user/pages/UserCreatePage";
-import { InquiryDetail } from "@/modules/inquiries/pages/InquiryDetail";
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { MainLayout } from '@/components/layouts/MainLayout';
+import SignUpPage from '@/modules/authentication/pages/SignUp';
+import LoginPage from '@/modules/authentication/pages/Login';
+import NewPasswordPage from '@/modules/authentication/pages/NewPassword';
+import SendEmailPage from '@/modules/authentication/pages/ResetPassword';
+import OTPPage from '@/modules/authentication/pages/OTP';
+import { PrivateRoute } from '@/router/PrivateRoute';
+import { Dashboard } from '@/modules/Dashboard/pages/Dashboard';
+import { DesignPage } from '@/modules/design/pages/DesignPage';
+import InquiriesPage from '@/modules/inquiries/pages/InquiriesPage';
+import UserList from '@/modules/user/pages/UserList';
+import UserEditPage from '@/modules/user/pages/UserEditPage';
+import UserCreatePage from '@/modules/user/pages/UserCreatePage';
+import { InquiryDetail } from '@/modules/inquiries/pages/InquiryDetail';
 
 export const AppRouter = () => {
   return (
