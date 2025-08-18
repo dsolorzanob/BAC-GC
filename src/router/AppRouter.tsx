@@ -5,6 +5,7 @@ import LoginPage from '@/modules/authentication/pages/Login';
 import NewPasswordPage from '@/modules/authentication/pages/NewPassword';
 import SendEmailPage from '@/modules/authentication/pages/ResetPassword';
 import OTPPage from '@/modules/authentication/pages/OTP';
+import PasswordChangeSuccess from '@/modules/authentication/pages/PasswordChangeSuccess';
 import { PrivateRoute } from '@/router/PrivateRoute';
 import { Dashboard } from '@/modules/Dashboard/pages/Dashboard';
 import { DesignPage } from '@/modules/design/pages/DesignPage';
@@ -28,6 +29,10 @@ export const AppRouter = () => {
             element={<NewPasswordPage />}
           />
           <Route path="reset-password/otp" element={<OTPPage />} />
+          <Route
+            path="reset-password/success"
+            element={<PasswordChangeSuccess />}
+          />
         </Route>
 
         {/* Rutas privadas */}

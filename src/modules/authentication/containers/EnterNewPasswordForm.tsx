@@ -19,7 +19,9 @@ const EnterNewPasswordForm = () => {
   const onSubmit = async (data: NewPassword) => {
     try {
       console.log('Form data:', data);
-      navigate('/reset-password/new-password');
+      // Simular cambio de contraseña exitoso
+      // Aquí iría la lógica real de cambio de contraseña
+      navigate('/reset-password/success');
     } catch (error) {
       console.error('Error sending recovery email:', error);
     }
