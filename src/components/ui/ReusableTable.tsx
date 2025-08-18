@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Table,
   TableHeader,
@@ -6,15 +6,15 @@ import {
   TableRow,
   TableHead,
   TableCell,
-} from "@/components/ui/table";
-import { Button } from "./button";
+} from '@/components/ui/table';
+import { Button } from './button';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./select";
+} from './select';
 
 interface Column<T> {
   key: keyof T;
@@ -54,7 +54,7 @@ export function ReusableTable<T extends Record<string, unknown>>({
         <Table>
           <TableHeader>
             <TableRow>
-              {columns.map((col) => (
+              {columns.map(col => (
                 <TableHead key={String(col.key)}>{col.label}</TableHead>
               ))}
               {renderActions && <TableHead>Acciones</TableHead>}
@@ -67,11 +67,11 @@ export function ReusableTable<T extends Record<string, unknown>>({
                 onClick={() => onRowClick?.(row)}
                 className={
                   onRowClick
-                    ? "cursor-pointer hover:bg-gray-50 transition-colors"
-                    : ""
+                    ? 'cursor-pointer hover:bg-gray-50 transition-colors'
+                    : ''
                 }
               >
-                {columns.map((col) => (
+                {columns.map(col => (
                   <TableCell key={String(col.key)}>
                     {col.render
                       ? col.render(row[col.key], row)
@@ -86,61 +86,57 @@ export function ReusableTable<T extends Record<string, unknown>>({
       </div>
 
       {/* Tarjetas para móviles */}
-   <div className="sm:hidden space-y-4">
-  {data.map((row, rowIndex) => (
-    <div
-      key={rowIndex}
-      className="relative rounded-xl p-4 ring-1 ring-gray-500 bg-white"
-    >
-      {/* Acciones superiores */}
-      {renderActions && (
-        <div className="absolute top-2 right-2 flex gap-2">
-          {renderActions(row)}
-        </div>
-      )}
+      <div className="sm:hidden space-y-4">
+        {data.map((row, rowIndex) => (
+          <div key={rowIndex} className="relative rounded-xl p-4 bg-white">
+            {/* Acciones superiores */}
+            {renderActions && (
+              <div className="absolute top-2 right-2 flex gap-2">
+                {renderActions(row)}
+              </div>
+            )}
 
-      {/* Contenido */}
-      {columns.map((col, colIndex) => (
-        <div key={String(col.key)} className="mb-2">
-          {colIndex === 0 ? (
-            <div className="text-sm font-bold text-gray-800">
-              {col.render
-                ? col.render(row[col.key], row)
-                : String(row[col.key])}
-            </div>
-          ) : (
-            <div className="text-xs text-gray-600">
-              {col.label}:{" "}
-              <span className="font-medium text-gray-700">
-                {col.render
-                  ? col.render(row[col.key], row)
-                  : String(row[col.key])}
-              </span>
-            </div>
-          )}
-        </div>
-      ))}
+            {/* Contenido */}
+            {columns.map((col, colIndex) => (
+              <div key={String(col.key)} className="mb-2">
+                {colIndex === 0 ? (
+                  <div className="text-sm font-bold text-gray-800">
+                    {col.render
+                      ? col.render(row[col.key], row)
+                      : String(row[col.key])}
+                  </div>
+                ) : (
+                  <div className="text-xs text-gray-600">
+                    {col.label}:{' '}
+                    <span className="font-medium text-gray-700">
+                      {col.render
+                        ? col.render(row[col.key], row)
+                        : String(row[col.key])}
+                    </span>
+                  </div>
+                )}
+              </div>
+            ))}
 
-      {/* Acción inferior */}
-      {!renderActions && (
-        <div className="mt-4">
-          <Button
-            variant="filled"
-            color="primary"
-            className="w-full"
-            onClick={(e) => {
-              e.stopPropagation();
-              console.log("Ver", row);
-            }}
-          >
-            Ver
-          </Button>
-        </div>
-      )}
-    </div>
-  ))}
-</div>
-
+            {/* Acción inferior */}
+            {!renderActions && (
+              <div className="mt-4">
+                <Button
+                  variant="filled"
+                  color="primary"
+                  className="w-full"
+                  onClick={e => {
+                    e.stopPropagation();
+                    console.log('Ver', row);
+                  }}
+                >
+                  Ver
+                </Button>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
 
       {/* Paginación */}
       {page !== undefined &&
@@ -152,7 +148,7 @@ export function ReusableTable<T extends Record<string, unknown>>({
               <span className="text-muted-foreground">Filas por página:</span>
               <Select
                 value={String(pageSize)}
-                onValueChange={(value) => {
+                onValueChange={value => {
                   onPageChange(1);
                   onPageSizeChange?.(parseInt(value));
                 }}
@@ -161,7 +157,7 @@ export function ReusableTable<T extends Record<string, unknown>>({
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  {[5, 10, 20, 50, 100].map((size) => (
+                  {[5, 10, 20, 50, 100].map(size => (
                     <SelectItem key={size} value={String(size)}>
                       {size}
                     </SelectItem>
