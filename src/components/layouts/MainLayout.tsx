@@ -27,7 +27,10 @@ export function MainLayout() {
           </div>
 
           {/* Contenido principal (Outlet/Children) - con z-index bajo */}
-          <main className="flex-1 bg-gray-50 p-6 relative z-0 overflow-auto">
+          <main
+            className="flex-1 bg-gray-50 p-6 relative z-0 overflow-auto"
+            style={{ zIndex: 0 }}
+          >
             <Outlet />
           </main>
         </div>
