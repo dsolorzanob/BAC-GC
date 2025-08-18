@@ -18,6 +18,7 @@ import { createUserSchema } from '../constants/create-user-schema';
 import type { CreateUser } from '../interfaces/create-user';
 import { CustomBreadcrumb } from '@/components/ui/CustomBreadcrumb';
 import { useEffect, useState } from 'react';
+import { isNotNumber } from '@/utils/number-type';
 
 export default function UserEditPage() {
   const navigate = useNavigate();
@@ -79,6 +80,82 @@ export default function UserEditPage() {
   const handleRoleChange = (value: string) => {
     setSelectedRole(value);
     setValue('rol', value);
+  };
+
+  // Función para validar input de teléfono
+  const handlePhoneKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    // Permitir teclas de navegación y control
+    if (
+      e.key === 'Backspace' ||
+      e.key === 'Delete' ||
+      e.key === 'Tab' ||
+      e.key === 'Escape' ||
+      e.key === 'Enter' ||
+      e.key === 'ArrowLeft' ||
+      e.key === 'ArrowRight' ||
+      e.key === 'Home' ||
+      e.key === 'End' ||
+      e.ctrlKey ||
+      e.metaKey
+    ) {
+      return;
+    }
+
+    // Permitir algunos caracteres especiales para teléfono
+    if (
+      e.key === '+' ||
+      e.key === '-' ||
+      e.key === '(' ||
+      e.key === ')' ||
+      e.key === ' '
+    ) {
+      return;
+    }
+
+    // Bloquear cualquier tecla que no sea número
+    if (isNotNumber(e.key)) {
+      e.preventDefault();
+    }
+  };
+
+  // Función para validar pegado de texto
+  const handlePhonePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const pastedText = e.clipboardData.getData('text');
+
+    // Solo permitir pegar si el texto contiene solo caracteres válidos para teléfono
+    const validPhoneRegex = /^[0-9+\-\s()]+$/;
+    if (validPhoneRegex.test(pastedText)) {
+      const input = e.currentTarget;
+      const start = input.selectionStart || 0;
+      const end = input.selectionEnd || 0;
+      const currentValue = input.value;
+
+      const newValue =
+        currentValue.substring(0, start) +
+        pastedText +
+        currentValue.substring(end);
+      setValue('telefono', newValue);
+
+      // Restaurar el cursor después del pegado
+      setTimeout(() => {
+        input.setSelectionRange(
+          start + pastedText.length,
+          start + pastedText.length
+        );
+      }, 0);
+    }
+  };
+
+  // Función para validar cambio de input
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+
+    // Solo permitir caracteres válidos para teléfono
+    const validPhoneRegex = /^[0-9+\-\s()]*$/;
+    if (value === '' || validPhoneRegex.test(value)) {
+      setValue('telefono', value);
+    }
   };
 
   return (
@@ -151,7 +228,13 @@ export default function UserEditPage() {
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Teléfono</label>
-                  <Input placeholder="+50212345678" {...register('telefono')} />
+                  <Input
+                    placeholder="+50212345678"
+                    {...register('telefono')}
+                    onKeyDown={handlePhoneKeyDown}
+                    onPaste={handlePhonePaste}
+                    onChange={handlePhoneChange}
+                  />
                   {errors.telefono && (
                     <p className="text-sm text-red-500">
                       {errors.telefono.message}
