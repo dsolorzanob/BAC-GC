@@ -1,20 +1,28 @@
-import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import type { FieldErrors } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { ArrowLeft } from 'lucide-react';
 import { createUserSchema } from '../constants/create-user-schema';
 import type { CreateUser } from '../interfaces/create-user';
 import { CustomBreadcrumb } from '@/components/ui/CustomBreadcrumb';
-import type { FieldErrors } from 'react-hook-form';
+import { useEffect, useState } from 'react';
 
 export default function UserEditPage() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
+  const [selectedRole, setSelectedRole] = useState<string>('');
 
   const {
     register,
@@ -25,6 +33,17 @@ export default function UserEditPage() {
     resolver: zodResolver(createUserSchema),
   });
 
+  // Usuario de ejemplo para edición
+  const user = {
+    nombre: 'Juan',
+    apellido: 'Pérez',
+    email: 'juan.perez@ejemplo.com',
+    telefono: '+50212345678',
+    rol: 'Administrador',
+    password: '',
+    confirmPassword: '',
+  };
+
   const handleBack = () => {
     navigate('/admin/usuarios');
   };
@@ -32,44 +51,34 @@ export default function UserEditPage() {
   useEffect(() => {
     if (!id) return;
 
-    const fetchUserById = async () => {
-      try {
-        // const response = await axios.get(`/api/usuarios/${id}`);
-        // const user = response.data;
-
-        // Simulamos datos:
-        const user = {
-          nombre: 'Ana',
-          apellido: 'Gomez',
-          email: 'ana.gomez@gmail.com',
-          telefono: '+50212345678',
-          rol: 'Usuario',
-          password: '',
-          confirmPassword: '',
-        };
-
-        Object.entries(user).forEach(([key, value]) =>
-          setValue(key as keyof CreateUser, value)
-        );
-      } catch (error) {
-        console.error('Error al cargar el usuario:', error);
-      }
-    };
-
-    fetchUserById();
+    try {
+      // Simular carga de datos del usuario
+      Object.entries(user).forEach(([key, value]) =>
+        setValue(key as keyof CreateUser, value)
+      );
+      setSelectedRole(user.rol);
+    } catch (error) {
+      console.error('Error loading user data:', error);
+    }
   }, [id, setValue]);
 
   const onSubmit = async (data: CreateUser) => {
     try {
       console.log('Actualizando usuario con ID:', id, data);
+      // Aquí iría la lógica para actualizar el usuario
       navigate('/admin/usuarios');
     } catch (error) {
-      console.error('Error actualizando usuario:', error);
+      console.error('Error updating user:', error);
     }
   };
 
   const onError = (errors: FieldErrors<CreateUser>) => {
     console.error('Errores del formulario:', errors);
+  };
+
+  const handleRoleChange = (value: string) => {
+    setSelectedRole(value);
+    setValue('rol', value);
   };
 
   return (
@@ -151,7 +160,17 @@ export default function UserEditPage() {
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Rol</label>
-                  <Input placeholder="Administrador" {...register('rol')} />
+                  <Select onValueChange={handleRoleChange} value={selectedRole}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Seleccionar rol" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Usuario">Usuario</SelectItem>
+                      <SelectItem value="Administrador">
+                        Administrador
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
                   {errors.rol && (
                     <p className="text-sm text-red-500">{errors.rol.message}</p>
                   )}

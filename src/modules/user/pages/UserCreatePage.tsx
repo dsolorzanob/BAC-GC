@@ -6,24 +6,39 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { PasswordInput } from '@/components/ui/password';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { ArrowLeft } from 'lucide-react';
 import { createUserSchema } from '../constants/create-user-schema';
 import type { CreateUser } from '../interfaces/create-user';
 import { CustomBreadcrumb } from '@/components/ui/CustomBreadcrumb';
+import { useState } from 'react';
 
 export default function UserCreatePage() {
   const navigate = useNavigate();
+  const [selectedRole, setSelectedRole] = useState<string>('');
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    setValue,
   } = useForm<CreateUser>({
     resolver: zodResolver(createUserSchema),
   });
 
   const handleBack = () => {
     navigate('/admin/usuarios');
+  };
+
+  const handleRoleChange = (value: string) => {
+    setSelectedRole(value);
+    setValue('rol', value);
   };
 
   const onSubmit = async (data: CreateUser) => {
@@ -119,7 +134,17 @@ export default function UserCreatePage() {
                 </div>
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Rol</label>
-                  <Input placeholder="Usuario" {...register('rol')} />
+                  <Select onValueChange={handleRoleChange} value={selectedRole}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Seleccionar rol" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Usuario">Usuario</SelectItem>
+                      <SelectItem value="Administrador">
+                        Administrador
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
                   {errors.rol && (
                     <p className="text-sm text-red-500">{errors.rol.message}</p>
                   )}

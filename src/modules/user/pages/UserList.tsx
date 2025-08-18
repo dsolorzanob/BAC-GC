@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Filter } from 'lucide-react';
+import { Filter, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CustomBreadcrumb } from '@/components/ui/CustomBreadcrumb';
 import { ReusableFilters } from '@/components/ui/ReusableFilters';
@@ -88,6 +88,10 @@ export default function UserList() {
     console.log('Descargando reporte...');
   };
 
+  const handleCreateUser = () => {
+    navigate('/admin/usuarios/crear');
+  };
+
   const columns: TableColumn<Users>[] = [
     { key: 'id', label: 'ID' },
     { key: 'nombre', label: 'Nombre' },
@@ -100,7 +104,18 @@ export default function UserList() {
     <div className="min-h-screen">
       <div className="mb-4">
         <CustomBreadcrumb items={[{ label: 'Inicio', href: '/' }]} />
-        <h1 className="text-2xl font-bold text-primary">Usuarios</h1>
+        <div className="flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-primary">Usuarios</h1>
+          <Button
+            onClick={handleCreateUser}
+            variant="filled"
+            color="info"
+            className="flex items-center gap-2"
+          >
+            <Plus className="h-4 w-4" />
+            Crear Usuario
+          </Button>
+        </div>
       </div>
 
       {/* Filtros para desktop */}
