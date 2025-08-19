@@ -16,23 +16,32 @@ A modern web application built with React, TypeScript, and Vite for the BAC mana
 
 ## 📋 Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - pnpm (recommended) or npm
 
 ## 🛠️ Installation
 
 1. **Clone the repository**
+
 ```bash
 git clone <repository-url>
 cd BAC-frontend
 ```
 
-2. **Install dependencies**
+2. **Switch to the develop branch (main branch with latest changes)**
+
+```bash
+git checkout develop
+```
+
+3. **Install dependencies**
+
 ```bash
 pnpm install
 ```
 
-3. **Start the development server**
+4. **Start the development server**
+
 ```bash
 pnpm dev
 ```
@@ -63,11 +72,13 @@ src/
 ## 🧪 Testing
 
 Run tests with:
+
 ```bash
 pnpm test
 ```
 
 For tests in watch mode:
+
 ```bash
 pnpm test:watch
 ```
@@ -93,6 +104,7 @@ pnpm test:watch
 ## 🔧 Configuration
 
 ### Environment Variables
+
 Create a `.env.local` file in the project root:
 
 ```env
@@ -101,37 +113,81 @@ VITE_APP_NAME=BAC Frontend
 ```
 
 ### ESLint
+
 The project includes ESLint configuration with specific rules for TypeScript and React.
 
 ## 📱 Main Modules
 
 ### 🔐 Authentication
+
 - Login with validation
 - Password recovery
 - Specific authentication layouts
 
 ### 👥 User Management
+
 - User list
 - User creation and editing
 - Roles and permissions
 
 ### 📊 Queries and Reports
+
 - Reusable reports table
 - Advanced filters
 - Data export
 
 ### 🎨 Dashboard
+
 - Main panel with metrics
 - Charts and visualizations
 - Customizable configuration
 
 ## 🤝 Contributing
 
-1. Fork the project
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+### Branch Strategy
+
+- **`develop`** - Main development branch with latest changes
+- **`main`** - Production-ready code (stable releases)
+- **`feature/*`** - Feature development branches
+
+### Development Workflow
+
+1. **Always start from develop branch**
+
+```bash
+git checkout develop
+git pull origin develop
+```
+
+2. **Create a feature branch**
+
+```bash
+git checkout -b feature/AmazingFeature
+```
+
+3. **Make your changes and commit**
+
+```bash
+git add .
+git commit -m 'Add some AmazingFeature'
+```
+
+4. **Push to your feature branch**
+
+```bash
+git push origin feature/AmazingFeature
+```
+
+5. **Create a Pull Request to `develop` branch**
+   - Never create PRs directly to `main`
+   - All changes must go through `develop` first
+
+### Code Standards
+
+- Follow the existing code style and conventions
+- Write meaningful commit messages
+- Include tests for new features
+- Update documentation when necessary
 
 ## 📄 License
 
