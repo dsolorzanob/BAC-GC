@@ -6,6 +6,8 @@ import { CustomBreadcrumb } from '@/components/ui/CustomBreadcrumb';
 import { ReusableFilters } from '@/components/ui/ReusableFilters';
 import { ReusableTable } from '@/components/ui/ReusableTable';
 import { RowActions } from '@/components/ui/RowActions';
+import DeleteUserConfirmation from '@/modules/user/components/DeleteUserConfirmación';
+import EditUserConfirmation from '@/modules/user/components/EditUserConfirmation';
 
 type TableColumn<T> = {
   key: keyof T | string;
@@ -31,6 +33,14 @@ export default function UserList() {
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
   const [type, setType] = useState('');
+
+  // State for delete confirmation dialog
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [userToDelete, setUserToDelete] = useState<Users | null>(null);
+
+  // State for edit confirmation dialog
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
+  const [userToEdit, setUserToEdit] = useState<Users | null>(null);
 
   const data: Users[] = [
     {
@@ -68,15 +78,27 @@ export default function UserList() {
   };
 
   const handleEdit = (user: Users) => {
-    navigate(`/admin/usuarios/editar/${user.id}`);
+    setUserToEdit(user);
+    setIsEditDialogOpen(true);
+  };
+
+  const confirmEdit = () => {
+    if (userToEdit) {
+      navigate(`/admin/usuarios/editar/${userToEdit.id}`);
+      setUserToEdit(null);
+    }
   };
 
   const handleDelete = (user: Users) => {
-    const confirmDelete = confirm(
-      `¿Eliminar a ${user.nombre} ${user.apellido}?`
-    );
-    if (confirmDelete) {
-      console.log('Usuario eliminado:', user.id);
+    setUserToDelete(user);
+    setIsDeleteDialogOpen(true);
+  };
+
+  const confirmDelete = () => {
+    if (userToDelete) {
+      console.log('Usuario eliminado:', userToDelete.id);
+      // Here you would typically call an API to delete the user
+      setUserToDelete(null);
     }
   };
 
@@ -168,6 +190,34 @@ export default function UserList() {
           )}
         />
       </div>
+
+      {/* Delete User Confirmation Dialog */}
+      {userToDelete && (
+        <DeleteUserConfirmation
+          isOpen={isDeleteDialogOpen}
+          onClose={() => {
+            setIsDeleteDialogOpen(false);
+            setUserToDelete(null);
+          }}
+          onConfirm={confirmDelete}
+          userName={userToDelete.nombre}
+          userLastName={userToDelete.apellido}
+        />
+      )}
+
+      {/* Edit User Confirmation Dialog */}
+      {userToEdit && (
+        <EditUserConfirmation
+          isOpen={isEditDialogOpen}
+          onClose={() => {
+            setIsEditDialogOpen(false);
+            setUserToEdit(null);
+          }}
+          onConfirm={confirmEdit}
+          userName={userToEdit.nombre}
+          userLastName={userToEdit.apellido}
+        />
+      )}
     </div>
   );
 }
